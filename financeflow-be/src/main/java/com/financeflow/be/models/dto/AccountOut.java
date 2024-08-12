@@ -13,7 +13,7 @@ public class AccountOut {
     private String id;
     private String firstName;
     private String lastName;
-    private Integer balance;
+    private Double balance;
     private String currencyCode;
     private LocalDateTime createdAt;
 

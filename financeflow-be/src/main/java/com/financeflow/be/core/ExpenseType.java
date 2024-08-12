@@ -1,5 +1,7 @@
 package com.financeflow.be.core;
 
+import com.financeflow.be.core.exceptions.ExpenseNotFoundException;
+
 public enum ExpenseType {
     FOOD("Food"),
     HOUSING("Housing"),
@@ -21,5 +23,14 @@ public enum ExpenseType {
     @Override
     public String toString() {
         return name;
+    }
+
+    public static ExpenseType fromString(String displayName) throws ExpenseNotFoundException {
+        for (ExpenseType type : ExpenseType.values()) {
+            if (type.toString().equalsIgnoreCase(displayName)) {
+                return type;
+            }
+        }
+        throw new ExpenseNotFoundException(displayName);
     }
 }

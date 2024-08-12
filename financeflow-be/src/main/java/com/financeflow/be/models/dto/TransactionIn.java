@@ -9,5 +9,6 @@ import lombok.Data;
 public class TransactionIn {
     private String description;
     private String expense;
-    private Integer amount;
+    private Double amount;
+    private Integer accountId;
 }

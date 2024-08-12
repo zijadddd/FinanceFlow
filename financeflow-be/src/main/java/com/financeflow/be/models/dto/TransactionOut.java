@@ -8,6 +8,17 @@ import lombok.Data;
 public class TransactionOut {
     private String accountName;
     private String description;
-    private Integer amount;
+    private Double amount;
     private String currencyCode;
+    private Double defaultAmount;
+    private String defaultCurrencyCode;
+
+    public TransactionOut(String accountName, String description, Double amount, String currencyCode) {
+        this.accountName = accountName;
+        this.description = description;
+        this.amount = amount;
+        this.currencyCode = currencyCode;
+        this.defaultAmount = amount;
+        this.defaultCurrencyCode = currencyCode;
+    }
 }

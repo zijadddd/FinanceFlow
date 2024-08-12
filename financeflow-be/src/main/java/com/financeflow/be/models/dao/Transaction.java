@@ -8,13 +8,14 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@Table(name = "transactions")
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Transaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer id;
 
@@ -25,10 +26,7 @@ public class Transaction {
     private ExpenseType expense;
 
     @Column(nullable = false)
-    private Integer amount;
-
-    @Column(nullable = false)
-    private String currencyCode;
+    private Double amount;
 
     @Column(nullable = false)
     private LocalDateTime processedAt;

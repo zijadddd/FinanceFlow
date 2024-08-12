@@ -14,12 +14,12 @@ import java.util.List;
 @AllArgsConstructor
 public class DefaultAccount {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer id;
 
     @Column(nullable = false)
-    private Integer balance;
+    private Double balance;
 
     @Column(nullable = false)
     private String currencyCode;

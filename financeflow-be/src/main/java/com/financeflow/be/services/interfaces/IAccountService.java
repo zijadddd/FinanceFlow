@@ -9,8 +9,8 @@ import com.financeflow.be.models.dto.AccountOut;
 import java.util.List;
 
 public interface IAccountService {
-    AccountOut getAccount(int id) throws AccountNotFoundException;
+    AccountOut getAccount(Integer id) throws AccountNotFoundException;
     List<AccountOut> getAll() throws AccountsNotFoundException;
     AccountOut create(AccountIn request);
-    String delete(int id) throws AccountNotFoundException;
+    String delete(Integer id) throws AccountNotFoundException;
 }

@@ -3,9 +3,11 @@ package com.financeflow.be.services.implementations;
 import com.financeflow.be.core.exceptions.AccountNotFoundException;
 import com.financeflow.be.core.exceptions.AccountsNotFoundException;
 import com.financeflow.be.models.dao.Account;
+import com.financeflow.be.models.dao.DefaultAccount;
 import com.financeflow.be.models.dto.AccountIn;
 import com.financeflow.be.models.dto.AccountOut;
 import com.financeflow.be.repositories.AccountRepository;
+import com.financeflow.be.repositories.DefaultAccountRepository;
 import com.financeflow.be.services.interfaces.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +22,11 @@ public class AccountService implements IAccountService {
     @Autowired
     private AccountRepository accountRepository;
 
+    @Autowired
+    private DefaultAccountRepository defaultAccountRepository;
+
     @Override
-    public AccountOut getAccount(int id) throws AccountNotFoundException {
+    public AccountOut getAccount(Integer id) throws AccountNotFoundException {
         return accountRepository.findById(id).map(AccountOut::new).orElseThrow(() -> new AccountNotFoundException(id));
     }
 
@@ -42,15 +47,20 @@ public class AccountService implements IAccountService {
         account.setCurrencyCode(request.getCurrencyCode());
         account.setCreatedAt(LocalDateTime.now());
 
+        DefaultAccount df = defaultAccountRepository.findById(request.getDefaultAccountId()).get();
+
+        account.setDefaultAccountId(df);
+
         accountRepository.save(account);
         return new AccountOut(account);
     }
 
     @Override
-    public String delete(int id) throws AccountNotFoundException {
-        if (!accountRepository.existsById(id)) throw new AccountNotFoundException(id);
-        accountRepository.deleteById(id);
+    public String delete(Integer id) throws AccountNotFoundException {
+        Account response = accountRepository.findById(id).orElseThrow(() -> new AccountNotFoundException(id));
 
-        return "Account with id " + id + " was successfully deleted";
+        accountRepository.delete(response);
+
+        return "Account with id " + id + " is successfully deleted.";
     }
 }

@@ -33,7 +33,7 @@ public class AccountController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<AccountOut> createAccount(@RequestBody AccountIn request) {
         AccountOut response = accountService.create(request);
 

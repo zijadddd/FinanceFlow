@@ -5,10 +5,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class AccountIn {
-    private String firstName;
-    private String lastName;
-    private Double balance;
+public class DefaultAccountIn {
     private String currencyCode;
-    private Integer defaultAccountId;
 }
