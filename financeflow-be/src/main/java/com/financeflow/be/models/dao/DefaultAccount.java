@@ -24,9 +24,6 @@ public class DefaultAccount {
     @Column(nullable = false)
     private String currencyCode;
 
-    @Column(nullable = false)
-    private LocalDateTime updatedAt;
-
     @OneToMany(mappedBy = "defaultAccountId", cascade = CascadeType.ALL)
     private List<Account> accounts;
 }

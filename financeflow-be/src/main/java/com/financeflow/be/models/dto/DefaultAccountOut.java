@@ -7,5 +7,4 @@ import lombok.Data;
 @AllArgsConstructor
 public class DefaultAccountOut {
     private String currencyCode;
-    private String updatedAt;
 }

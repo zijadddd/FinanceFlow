@@ -22,7 +22,7 @@ public class DefaultAccountService implements IDefaultAccountService {
     @Override
     public DefaultAccountOut getDefaultAccount() {
         DefaultAccount defaultAccount = defaultAccountRepository.findById(1).get();
-        DefaultAccountOut response = new DefaultAccountOut(defaultAccount.getCurrencyCode(), defaultAccount.getUpdatedAt().toString());
+        DefaultAccountOut response = new DefaultAccountOut(defaultAccount.getCurrencyCode());
 
         return response;
     }
