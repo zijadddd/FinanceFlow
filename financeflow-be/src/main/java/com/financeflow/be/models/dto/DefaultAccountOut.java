@@ -6,5 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class DefaultAccountOut {
+    private Double balance;
     private String currencyCode;
 }
