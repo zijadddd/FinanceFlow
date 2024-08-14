@@ -26,7 +26,7 @@ public class TransactionController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<TransactionOut>> getTransactions() throws AccountNotFoundException {
+    public ResponseEntity<List<TransactionOut>> getTransactions() throws AccountNotFoundException, CurrencyDoesNotExistException {
         List<TransactionOut> response = transactionService.getAllTransactions();
 
         return new ResponseEntity<>(response, HttpStatus.OK);
