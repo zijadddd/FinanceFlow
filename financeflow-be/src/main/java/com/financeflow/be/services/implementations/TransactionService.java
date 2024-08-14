@@ -49,6 +49,7 @@ public class TransactionService implements ITransactionService {
         String apiResponse = restTemplate.getForObject(uri + balanceContainer.getCurrencyCode().toLowerCase() + ".json", String.class);
         JSONObject currencyCourses = new JSONObject(apiResponse).getJSONObject(balanceContainer.getCurrencyCode().toLowerCase());
 
+
         return balanceContainer.getAmount() * currencyCourses.getDouble(newCurrencyCode.toLowerCase());
     }
 
@@ -88,20 +89,25 @@ public class TransactionService implements ITransactionService {
 
 
         TransactionOut response = new TransactionOut(account.getName(),
-                transaction.getDescription(), transaction.getAmount(), account.getCurrencyCode(), defaultAmount, defaultAccount.getCurrencyCode());
+                transaction.getDescription(), transaction.getExpense().toString(), transaction.getAmount(), account.getCurrencyCode(), defaultAmount, defaultAccount.getCurrencyCode(), transaction.getProcessedAt().toString());
 
         return response;
     }
 
     @Override
-    public List<TransactionOut> getAllTransactions() throws AccountNotFoundException {
+    public List<TransactionOut> getAllTransactions() throws AccountNotFoundException, CurrencyDoesNotExistException {
         List<Transaction> transactions = transactionRepository.findAll();
         List<TransactionOut> response = new ArrayList<>();
         for (Transaction transaction : transactions) {
             Account account = accountRepository.findById(transaction.getAccount().getId())
                     .orElseThrow(() -> new AccountNotFoundException(transaction.getAccount().getId()));
-            response.add(new TransactionOut(account.getName(), transaction.getDescription(), transaction.getAmount(),
-                    account.getCurrencyCode(), account.getBalance(), account.getCurrencyCode()));
+
+            Double defaultAmount = this.convertFromOneCurrencyToOther(new BalanceContainer(
+                    transaction.getAmount(), account.getCurrencyCode()
+            ), defaultAccountRepository.findById(1).get().getCurrencyCode());
+
+            response.add(new TransactionOut(account.getName(), transaction.getDescription(), transaction.getExpense().toString(), transaction.getAmount(),
+                    account.getCurrencyCode(), defaultAmount, defaultAccountRepository.findById(1).get().getCurrencyCode(), transaction.getProcessedAt().toString()));
         }
 
         return response;
@@ -116,8 +122,8 @@ public class TransactionService implements ITransactionService {
             Account account = accountRepository.findById(transaction.getAccount().getId())
                     .orElseThrow(() -> new AccountNotFoundException(transaction.getAccount().getId()));
 
-            response.add(new TransactionOut(account.getName(), transaction.getDescription(), transaction.getAmount(),
-                    account.getCurrencyCode(), account.getBalance(), account.getCurrencyCode()));
+            response.add(new TransactionOut(account.getName(), transaction.getDescription(), transaction.getExpense().toString(), transaction.getAmount(),
+                    account.getCurrencyCode(), account.getBalance(), account.getCurrencyCode(), transaction.getProcessedAt().toString()));
         }
 
         if (response.isEmpty()) throw new NoTransactionsForAccountException(id);
