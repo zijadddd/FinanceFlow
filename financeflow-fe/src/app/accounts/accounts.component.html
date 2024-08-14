@@ -1,29 +1,14 @@
 <div class="accounts">
     <a href="#" class="accounts__button">Create account</a>
     <div class="accounts__container">
-        <div class="container__item">
-            <h1>Current</h1>
-            <h1>312 EUR</h1>
-        </div>
-        <div class="container__item">
-            <h1>Savings</h1>
-            <h1>865.43 USD</h1>
-        </div>
-        <div class="container__item">
-            <h1>Foreign currency</h1>
-            <h1>124.4 BAM</h1>
-        </div>
-        <div class="container__item">
-            <h1>Giro</h1>
-            <h1>124.4 BAM</h1>
-        </div>
-        <div class="container__item">
-            <h1>PayPal</h1>
-            <h1>124.4 BAM</h1>
-        </div>
-        <div class="container__item">
-            <h1>Payoneer</h1>
-            <h1>124.4 BAM</h1>
+        <div class="container__item" *ngFor="let account of accounts">
+            <h1>{{account.name}}</h1>
+            <div class="item__container">
+                <h1>{{account.defaultBalance.toFixed(2)}}&nbsp;{{account.defaultCurrencyCode}}</h1>
+                <p class="container__smaller-text" *ngIf="account.currencyCode !== account.defaultCurrencyCode">
+                    {{account.balance.toFixed(2)}}&nbsp;{{account.currencyCode}}
+                </p>
+            </div>
         </div>
     </div>
 </div>

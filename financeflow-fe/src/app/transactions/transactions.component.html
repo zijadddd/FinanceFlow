@@ -2,46 +2,26 @@
     <div class="transactions__dropdown">
         <button class="dropdown__btn">All accounts<div class="dropdown__arrow"></div></button>
         <div class="dropdown__content">
-          <a href="#">Account 1</a>
-          <a href="#">Account 2</a>
-          <a href="#">Account 3</a>
+          <a href="#" *ngFor="let account of accounts">{{account.name}}</a>
         </div>
     </div>
     <div class="transactions__container">
-        <div class="container__item">
+        <div class="container__item" *ngFor="let transaction of transactions">
             <div class="item__left-block">
-                <p class="left-block__account">Account 1</p>
-                <p class="left-block__description"><b>Description:</b> Lorem ipsum dolor</p>
-                <p class="left-block__expense"><b>Expense: </b>TRANSFER</p>
-                <p class="left-block__processed-at"><b>Date:</b> 12.03.2023 <b>Time:</b> 15:23:56</p>
+                <p class="left-block__account">{{transaction.accountName}}</p>
+                <p class="left-block__description"><b>Description:</b> {{transaction.description}}</p>
+                <p class="left-block__expense"><b>Expense: </b>{{transaction.expense}}</p>
+                <p class="left-block__processed-at"><b>Date:</b> {{transaction.processedAt.substring(0, 10)}} <b>Time:</b> {{transaction.processedAt.substring(11, 16)}}</p>
             </div>
             <div class="item__right-block">
-                <p>-12 EUR</p>
-                <img src="assets/arrow-down.svg"/>
-            </div>
-        </div>
-        <div class="container__item">
-            <div class="item__left-block">
-                <p class="left-block__account">Account 2</p>
-                <p class="left-block__description"><b>Description:</b> Lorem ipsum dolor et neke</p>
-                <p class="left-block__expense"><b>Expense: </b>FOOD</p>
-                <p class="left-block__processed-at"><b>Date:</b> 08.08.2024 <b>Time:</b> 16:33:16</p>
-            </div>
-            <div class="item__right-block">
-                <p>245 BAM</p>
-                <img src="assets/arrow-up.svg"/>
-            </div>
-        </div>
-        <div class="container__item">
-            <div class="item__left-block">
-                <p class="left-block__account">Account 1</p>
-                <p class="left-block__description"><b>Description:</b> Lorem ipsum dolor</p>
-                <p class="left-block__expense"><b>Expense: </b>HOUSING</p>
-                <p class="left-block__processed-at"><b>Date:</b> 12.03.2023 <b>Time:</b> 15:23:56</p>
-            </div>
-            <div class="item__right-block">
-                <p>-12 EUR</p>
-                <img src="assets/arrow-down.svg"/>
+                <div class="right-block__container">
+                    <p>{{transaction.defaultAmount.toFixed(2)}}&nbsp;{{transaction.defaultCurrencyCode}}</p>
+                    <img src="assets/arrow-down.svg" *ngIf="transaction.amount < 0" />
+                    <img src="assets/arrow-up.svg" *ngIf="transaction.amount > 0" />
+                </div>
+                <p class="right-block__smaller-text" *ngIf="transaction.currencyCode !== transaction.defaultCurrencyCode">
+                    {{transaction.amount.toFixed(2)}}&nbsp;{{transaction.currencyCode}}
+                </p>
             </div>
         </div>
     </div>

@@ -48,7 +48,8 @@
     width: 50%;
     display: flex;
     justify-content: end;
-    align-items: center;
+    align-items: end;
+    flex-direction: column;
 }
 
 .item__right-block img {
@@ -57,6 +58,17 @@
 
 .item__right-block p {
     font-weight: 700;
+}
+
+.right-block__smaller-text {
+    font-size: 15px;
+}
+
+.right-block__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
 }
 
 .dropdown__btn {
