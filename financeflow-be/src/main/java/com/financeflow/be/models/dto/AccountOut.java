@@ -11,16 +11,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class AccountOut {
     private String id;
-    private String firstName;
-    private String lastName;
+    private String name;
     private Double balance;
     private String currencyCode;
     private LocalDateTime createdAt;
 
     public AccountOut(Account account) {
         this.id = account.getId().toString();
-        this.firstName = account.getFirstName();
-        this.lastName = account.getLastName();
+        this.name = account.getName();
         this.balance = account.getBalance();
         this.currencyCode = account.getCurrencyCode();
         this.createdAt = account.getCreatedAt();

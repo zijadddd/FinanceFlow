@@ -24,6 +24,6 @@ public class DefaultAccount {
     @Column(nullable = false)
     private String currencyCode;
 
-    @OneToMany(mappedBy = "defaultAccountId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "defaultAccount", cascade = CascadeType.ALL)
     private List<Account> accounts;
 }

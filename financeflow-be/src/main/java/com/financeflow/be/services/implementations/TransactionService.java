@@ -1,14 +1,10 @@
 package com.financeflow.be.services.implementations;
 
 import com.financeflow.be.core.ExpenseType;
-import com.financeflow.be.core.exceptions.AccountNotFoundException;
-import com.financeflow.be.core.exceptions.CurrencyDoesNotExistException;
-import com.financeflow.be.core.exceptions.ExpenseNotFoundException;
-import com.financeflow.be.core.exceptions.NotEnoughBalanceException;
+import com.financeflow.be.core.exceptions.*;
 import com.financeflow.be.models.dao.Account;
 import com.financeflow.be.models.dao.DefaultAccount;
 import com.financeflow.be.models.dao.Transaction;
-import com.financeflow.be.models.dto.AccountOut;
 import com.financeflow.be.models.dto.BalanceContainer;
 import com.financeflow.be.models.dto.TransactionIn;
 import com.financeflow.be.models.dto.TransactionOut;
@@ -24,7 +20,6 @@ import org.springframework.web.client.RestTemplate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class TransactionService implements ITransactionService {
@@ -67,7 +62,7 @@ public class TransactionService implements ITransactionService {
         transaction.setExpense(ExpenseType.fromString(request.getExpense()));
         transaction.setAmount(request.getAmount());
         transaction.setProcessedAt(LocalDateTime.now());
-        transaction.setAccountId(account);
+        transaction.setAccount(account);
         transactionRepository.save(transaction);
 
         account.setBalance(account.getBalance() + request.getAmount());
@@ -92,7 +87,7 @@ public class TransactionService implements ITransactionService {
         defaultAccountRepository.save(defaultAccount);
 
 
-        TransactionOut response = new TransactionOut(account.getFirstName() + account.getLastName(),
+        TransactionOut response = new TransactionOut(account.getName(),
                 transaction.getDescription(), transaction.getAmount(), account.getCurrencyCode(), defaultAmount, defaultAccount.getCurrencyCode());
 
         return response;
@@ -103,11 +98,29 @@ public class TransactionService implements ITransactionService {
         List<Transaction> transactions = transactionRepository.findAll();
         List<TransactionOut> response = new ArrayList<>();
         for (Transaction transaction : transactions) {
-            Account account = accountRepository.findById(transaction.getAccountId().getId())
-                    .orElseThrow(() -> new AccountNotFoundException(transaction.getAccountId().getId()));
-            response.add(new TransactionOut(account.getFirstName() + " " + account.getLastName(), transaction.getDescription(), transaction.getAmount(),
+            Account account = accountRepository.findById(transaction.getAccount().getId())
+                    .orElseThrow(() -> new AccountNotFoundException(transaction.getAccount().getId()));
+            response.add(new TransactionOut(account.getName(), transaction.getDescription(), transaction.getAmount(),
                     account.getCurrencyCode(), account.getBalance(), account.getCurrencyCode()));
         }
+
+        return response;
+    }
+
+    @Override
+    public List<TransactionOut> getAllTransactionsForAccount(Integer id) throws AccountNotFoundException, NoTransactionsForAccountException {
+        List<Transaction> transactions = transactionRepository.findAll();
+        List<TransactionOut> response = new ArrayList<>();
+        for (Transaction transaction : transactions) {
+            if (transaction.getAccount().getId() != id) continue;
+            Account account = accountRepository.findById(transaction.getAccount().getId())
+                    .orElseThrow(() -> new AccountNotFoundException(transaction.getAccount().getId()));
+
+            response.add(new TransactionOut(account.getName(), transaction.getDescription(), transaction.getAmount(),
+                    account.getCurrencyCode(), account.getBalance(), account.getCurrencyCode()));
+        }
+
+        if (response.isEmpty()) throw new NoTransactionsForAccountException(id);
 
         return response;
     }

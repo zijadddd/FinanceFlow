@@ -41,15 +41,14 @@ public class AccountService implements IAccountService {
     @Override
     public AccountOut create(AccountIn request) {
         Account account = new Account();
-        account.setFirstName(request.getFirstName());
-        account.setLastName(request.getLastName());
+        account.setName(request.getName());
         account.setBalance(request.getBalance());
         account.setCurrencyCode(request.getCurrencyCode());
         account.setCreatedAt(LocalDateTime.now());
 
         DefaultAccount df = defaultAccountRepository.findById(request.getDefaultAccountId()).get();
 
-        account.setDefaultAccountId(df);
+        account.setDefaultAccount(df);
 
         accountRepository.save(account);
         return new AccountOut(account);

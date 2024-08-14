@@ -43,4 +43,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleCurrencyDoesNotExistException(CurrencyDoesNotExistException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(NoTransactionsForAccountException.class)
+    public ResponseEntity<String> handleNoTransactionsForAccountException(NoTransactionsForAccountException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
 }

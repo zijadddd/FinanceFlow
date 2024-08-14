@@ -20,10 +20,7 @@ public class Account {
     private Integer id;
 
     @Column(nullable = false)
-    private String firstName;
-
-    @Column(nullable = false)
-    private String lastName;
+    private String name;
 
     @Column(nullable = false)
     private Double balance;
@@ -36,8 +33,8 @@ public class Account {
 
     @ManyToOne
     @JoinColumn(name = "defaultAccountId", nullable = false)
-    private DefaultAccount defaultAccountId;
+    private DefaultAccount defaultAccount;
 
-    @OneToMany(mappedBy = "accountId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Transaction> transactions;
 }

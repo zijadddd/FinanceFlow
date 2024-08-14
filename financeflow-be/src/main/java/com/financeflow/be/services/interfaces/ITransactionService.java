@@ -1,9 +1,6 @@
 package com.financeflow.be.services.interfaces;
 
-import com.financeflow.be.core.exceptions.AccountNotFoundException;
-import com.financeflow.be.core.exceptions.CurrencyDoesNotExistException;
-import com.financeflow.be.core.exceptions.ExpenseNotFoundException;
-import com.financeflow.be.core.exceptions.NotEnoughBalanceException;
+import com.financeflow.be.core.exceptions.*;
 import com.financeflow.be.models.dto.BalanceContainer;
 import com.financeflow.be.models.dto.TransactionIn;
 import com.financeflow.be.models.dto.TransactionOut;
@@ -15,4 +12,5 @@ public interface ITransactionService {
     Double convertFromOneCurrencyToOther(BalanceContainer balanceContainer, String newCurrencyCode) throws CurrencyDoesNotExistException;
     TransactionOut commitTransaction(TransactionIn request) throws AccountNotFoundException, NotEnoughBalanceException, ExpenseNotFoundException, CurrencyDoesNotExistException;
     List<TransactionOut> getAllTransactions() throws AccountNotFoundException;
+    List<TransactionOut> getAllTransactionsForAccount(Integer id) throws AccountNotFoundException, NoTransactionsForAccountException;
 }

@@ -33,5 +33,5 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name = "accountId", nullable = false)
-    private Account accountId;
+    private Account account;
 }
