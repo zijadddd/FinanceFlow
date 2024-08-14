@@ -54,7 +54,7 @@
     color: white;
 }
 
-.dropdown__btn {
+.dropdown__button {
     background-color: #f9f9f9;
     border-radius: 15px;
     color: #1f1f1f;
@@ -64,6 +64,20 @@
     cursor: pointer;
     font-family: 'Space Grotesk';
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button__arrow {
+    width: 0; 
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    
+    border-top: 10px solid #1f1f1f;
+    display: inline;
+    margin-left: 3px;
 }
   
 .settings__dropdown {
@@ -99,8 +113,13 @@
     transition: 0.2s ease;
 }
 
-.settings__dropdown:hover .dropdown__btn { 
+.settings__dropdown:hover .dropdown__button { 
     background-color: #1a94e6; 
     color: white; 
+    transition: 0.2s ease;
+}
+
+.settings__dropdown:hover .button__arrow {
+    border-top: 10px solid white;
     transition: 0.2s ease;
 }

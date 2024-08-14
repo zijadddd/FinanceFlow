@@ -20,7 +20,7 @@
 
 .container__item {
     width: 90%;
-    height: 100px;
+    height: 120px;
     border-radius: 15px;
     display: flex;
     justify-content: space-between;
@@ -39,7 +39,7 @@
     font-weight: bold;
 }
 
-.left-block__description, .left-block__processed-at {
+.left-block__description, .left-block__processed-at, .left-block__expense {
     font-size: 15px;
     margin-top: 3px;
 }
@@ -69,6 +69,20 @@
     cursor: pointer;
     font-family: 'Space Grotesk';
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdown__arrow {
+    width: 0; 
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    
+    border-top: 10px solid #1f1f1f;
+    display: inline;
+    margin-left: 3px;
 }
   
 .transactions__dropdown {
@@ -106,5 +120,10 @@
 .transactions__dropdown:hover .dropdown__btn { 
     background-color: #1a94e6; 
     color: white; 
+    transition: 0.2s ease;
+}
+
+.transactions__dropdown:hover .dropdown__arrow {
+    border-top: 10px solid white;
     transition: 0.2s ease;
 }
