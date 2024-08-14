@@ -2,7 +2,7 @@
     <div class="settings__change-currency">
         <p>Default currency</p>
         <div class="settings__dropdown">
-            <button class="dropdown__button">EUR<div class="button__arrow"></div></button>
+            <button class="dropdown__button">{{defaultAccount.currencyCode}}<div class="button__arrow"></div></button>
             <div class="dropdown__content">
               <a href="#">BAM</a>
               <a href="#">USD</a>
@@ -11,8 +11,10 @@
         </div>
     </div>
     <div class="settings__delete-all-data">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, id cumque! Odit debitis quae voluptatibus pariatur possimus, exercitationem amet nihil obcaecati inventore ipsam aut sunt architecto? Necessitatibus possimus maiores cumque.</p>
+        <p>Deleting all your data will permanently remove all your information, including transactions, settings, and other saved data. This action is irreversible, and the data 
+            <span>cannot be recovered</span>.
+        </p>
         <a href="#" class="delete-all-data__btn">Delete all data</a>
     </div>
-    <div class="settings__exchange-rate-updated"><b>Exchange rate updated:</b> 13.08.2024</div>
+    <div class="settings__exchange-rate-updated"><b>Exchange rate updated:</b> {{exchangeRateChanged}}</div>
 </div>

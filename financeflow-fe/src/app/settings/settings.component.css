@@ -32,6 +32,11 @@
     width: 50%;
 }
 
+.settings__delete-all-data p span {
+    color:#e53935;
+    font-weight: bold;
+}
+
 .delete-all-data__btn {
     background-color: #f9f9f9;
     border-radius: 15px;
