@@ -33,7 +33,7 @@ public class TransactionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<TransactionOut>> getTransactionsForAccount(@PathVariable Integer id) throws AccountNotFoundException, NoTransactionsForAccountException {
+    public ResponseEntity<List<TransactionOut>> getTransactionsForAccount(@PathVariable Integer id) throws AccountNotFoundException, NoTransactionsForAccountException, CurrencyDoesNotExistException {
         List<TransactionOut> response = transactionService.getAllTransactionsForAccount(id);
 
         return new ResponseEntity<>(response, HttpStatus.OK);

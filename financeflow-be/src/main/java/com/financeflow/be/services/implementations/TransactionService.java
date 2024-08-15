@@ -12,6 +12,7 @@ import com.financeflow.be.repositories.AccountRepository;
 import com.financeflow.be.repositories.DefaultAccountRepository;
 import com.financeflow.be.repositories.TransactionRepository;
 import com.financeflow.be.services.interfaces.ITransactionService;
+import lombok.Builder;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -114,7 +115,7 @@ public class TransactionService implements ITransactionService {
     }
 
     @Override
-    public List<TransactionOut> getAllTransactionsForAccount(Integer id) throws AccountNotFoundException, NoTransactionsForAccountException {
+    public List<TransactionOut> getAllTransactionsForAccount(Integer id) throws AccountNotFoundException, NoTransactionsForAccountException, CurrencyDoesNotExistException {
         List<Transaction> transactions = transactionRepository.findAll();
         List<TransactionOut> response = new ArrayList<>();
         for (Transaction transaction : transactions) {
@@ -122,8 +123,14 @@ public class TransactionService implements ITransactionService {
             Account account = accountRepository.findById(transaction.getAccount().getId())
                     .orElseThrow(() -> new AccountNotFoundException(transaction.getAccount().getId()));
 
+            DefaultAccount defaultAccount = defaultAccountRepository.findById(1).get();
+
+            Double defaultAmount = this.convertFromOneCurrencyToOther(new BalanceContainer(
+                    transaction.getAmount(), account.getCurrencyCode()
+            ), defaultAccount.getCurrencyCode());
+
             response.add(new TransactionOut(account.getName(), transaction.getDescription(), transaction.getExpense().toString(), transaction.getAmount(),
-                    account.getCurrencyCode(), account.getBalance(), account.getCurrencyCode(), transaction.getProcessedAt().toString()));
+                    account.getCurrencyCode(), defaultAmount, defaultAccount.getCurrencyCode(), transaction.getProcessedAt().toString()));
         }
 
         if (response.isEmpty()) throw new NoTransactionsForAccountException(id);

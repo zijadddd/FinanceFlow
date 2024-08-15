@@ -12,5 +12,5 @@ public interface ITransactionService {
     Double convertFromOneCurrencyToOther(BalanceContainer balanceContainer, String newCurrencyCode) throws CurrencyDoesNotExistException;
     TransactionOut commitTransaction(TransactionIn request) throws AccountNotFoundException, NotEnoughBalanceException, ExpenseNotFoundException, CurrencyDoesNotExistException;
     List<TransactionOut> getAllTransactions() throws AccountNotFoundException, CurrencyDoesNotExistException;
-    List<TransactionOut> getAllTransactionsForAccount(Integer id) throws AccountNotFoundException, NoTransactionsForAccountException;
+    List<TransactionOut> getAllTransactionsForAccount(Integer id) throws AccountNotFoundException, NoTransactionsForAccountException, CurrencyDoesNotExistException;
 }
