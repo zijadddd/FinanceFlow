@@ -18,6 +18,8 @@ import { AccountResponse } from '../shared/models/account.model';
 export class TransactionsComponent implements OnInit {
   public transactions: TransactionResponse[];
   public accounts: AccountResponse[];
+  public accountHolder: AccountResponse | null;
+  public dropdownText: string = 'All accounts';
 
   constructor(private transactionService: TransactionService, private accountService: AccountService) {
   }
@@ -29,6 +31,32 @@ export class TransactionsComponent implements OnInit {
 
     this.accountService.getAllAccounts().subscribe((response: AccountResponse[]) => {
       this.accounts = response;
+    });
+  }
+
+  getAllTransactionsForAccount(id: number) {
+    this.transactionService.getAllTransactionsForAccount(id).subscribe((response: TransactionResponse[]) => {
+      if (this.accountHolder) {
+          this.accounts.push(this.accountHolder);
+      } 
+
+      this.dropdownText = response[0].accountName;
+      this.transactions = response;
+
+      this.accountHolder = this.accounts.find(account => account.id === id) || ({} as AccountResponse);
+      this.accounts = this.accounts.filter(account => account.id !== id);
+    });
+  }
+
+  getAllTransactions() {
+    this.transactionService.getAllTransactions().subscribe((response: TransactionResponse[]) => {
+      if (this.accountHolder) {
+        this.accounts.push(this.accountHolder);
+      } 
+
+      this.transactions = response;
+      this.dropdownText = "All accounts";
+      this.accountHolder = null;
     });
   }
 }

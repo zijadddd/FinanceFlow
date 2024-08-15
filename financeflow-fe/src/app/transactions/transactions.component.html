@@ -1,8 +1,9 @@
 <div class="transactions">
     <div class="transactions__dropdown">
-        <button class="dropdown__btn">All accounts<div class="dropdown__arrow"></div></button>
+        <button class="dropdown__btn">{{dropdownText}}<div class="dropdown__arrow"></div></button>
         <div class="dropdown__content">
-          <a href="#" *ngFor="let account of accounts">{{account.name}}</a>
+            <a (click)="getAllTransactions()" *ngIf="accountHolder">All accounts</a>
+            <a *ngFor="let account of accounts" (click)="getAllTransactionsForAccount(account.id)">{{account.name}}</a>
         </div>
     </div>
     <div class="transactions__container">

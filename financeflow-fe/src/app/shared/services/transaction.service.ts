@@ -15,8 +15,8 @@ export class TransactionService {
     return this.httpClient.get<TransactionResponse[]>(TransactionApi.GET_TRANSACTIONS);
   }
 
-  getAllTransactionsForAccount(id: number): Observable<TransactionResponse> {
-    return this.httpClient.get<TransactionResponse>(TransactionApi.GET_TRANSACTIONS_FOR_ACCOUNT.replace('#', id.toString()));
+  getAllTransactionsForAccount(id: number): Observable<TransactionResponse[]> {
+    return this.httpClient.get<TransactionResponse[]>(TransactionApi.GET_TRANSACTIONS_FOR_ACCOUNT.replace('#', id.toString()));
   }
 
   commitTransaction(request: TransactionRequest): Observable<TransactionResponse> {
