@@ -11,17 +11,23 @@ import { NgFor, NgIf } from '@angular/common';
   templateUrl: './accounts.component.html',
   styleUrl: './accounts.component.css',
   encapsulation: ViewEncapsulation.ShadowDom,
-  providers: [provideAnimations()]
+  providers: [provideAnimations()],
 })
 export class AccountsComponent implements OnInit {
   public accounts: AccountResponse[];
+  public showMessage: boolean = false;
 
-  constructor(private accountService: AccountService) {
-  }
+  constructor(private accountService: AccountService) {}
 
   ngOnInit(): void {
-    this.accountService.getAllAccounts().subscribe((response: AccountResponse[]) => {
-      this.accounts = response;
-    });
+    this.accountService
+      .getAllAccounts()
+      .subscribe((response: AccountResponse[]) => {
+        this.accounts = response;
+      });
+
+    if (Array.isArray(this.accounts) && this.accounts.length === 0) {
+      this.showMessage = true;
+    }
   }
 }

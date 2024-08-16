@@ -1,8 +1,8 @@
 export class DefaultAccountResponse {
-    balance: number;
-    currencyCode: string;
+  balance: number;
+  currencyCode: string;
 }
 
 export class DefaultAccountRequest {
-    currencyCode: string;
+  currencyCode: string;
 }

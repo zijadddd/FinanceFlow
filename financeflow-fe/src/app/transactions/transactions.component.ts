@@ -13,50 +13,67 @@ import { AccountResponse } from '../shared/models/account.model';
   templateUrl: './transactions.component.html',
   styleUrl: './transactions.component.css',
   encapsulation: ViewEncapsulation.ShadowDom,
-  providers: [provideAnimations()]
+  providers: [provideAnimations()],
 })
 export class TransactionsComponent implements OnInit {
   public transactions: TransactionResponse[];
   public accounts: AccountResponse[];
   public accountHolder: AccountResponse | null;
   public dropdownText: string = 'All accounts';
+  public showMessage: boolean = false;
 
-  constructor(private transactionService: TransactionService, private accountService: AccountService) {
-  }
+  constructor(
+    private transactionService: TransactionService,
+    private accountService: AccountService
+  ) {}
 
   ngOnInit(): void {
-    this.transactionService.getAllTransactions().subscribe((response: TransactionResponse[]) => {
-      this.transactions = response;
-    });
+    this.transactionService
+      .getAllTransactions()
+      .subscribe((response: TransactionResponse[]) => {
+        this.transactions = response;
+      });
 
-    this.accountService.getAllAccounts().subscribe((response: AccountResponse[]) => {
-      this.accounts = response;
-    });
+    this.accountService
+      .getAllAccounts()
+      .subscribe((response: AccountResponse[]) => {
+        this.accounts = response;
+      });
+
+    if (Array.isArray(this.accounts) && this.accounts.length === 0) {
+      this.showMessage = true;
+    }
   }
 
   getAllTransactionsForAccount(id: number) {
-    this.transactionService.getAllTransactionsForAccount(id).subscribe((response: TransactionResponse[]) => {
-      if (this.accountHolder) {
+    this.transactionService
+      .getAllTransactionsForAccount(id)
+      .subscribe((response: TransactionResponse[]) => {
+        if (this.accountHolder) {
           this.accounts.push(this.accountHolder);
-      } 
+        }
 
-      this.dropdownText = response[0].accountName;
-      this.transactions = response;
+        this.dropdownText = response[0].accountName;
+        this.transactions = response;
 
-      this.accountHolder = this.accounts.find(account => account.id === id) || ({} as AccountResponse);
-      this.accounts = this.accounts.filter(account => account.id !== id);
-    });
+        this.accountHolder =
+          this.accounts.find((account) => account.id === id) ||
+          ({} as AccountResponse);
+        this.accounts = this.accounts.filter((account) => account.id !== id);
+      });
   }
 
   getAllTransactions() {
-    this.transactionService.getAllTransactions().subscribe((response: TransactionResponse[]) => {
-      if (this.accountHolder) {
-        this.accounts.push(this.accountHolder);
-      } 
+    this.transactionService
+      .getAllTransactions()
+      .subscribe((response: TransactionResponse[]) => {
+        if (this.accountHolder) {
+          this.accounts.push(this.accountHolder);
+        }
 
-      this.transactions = response;
-      this.dropdownText = "All accounts";
-      this.accountHolder = null;
-    });
+        this.transactions = response;
+        this.dropdownText = 'All accounts';
+        this.accountHolder = null;
+      });
   }
 }

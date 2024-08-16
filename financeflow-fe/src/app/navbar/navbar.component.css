@@ -1,40 +1,40 @@
 .navbar {
-    width: 100%;
-    height: 100px;
-    display: flex;
+  width: 100%;
+  height: 100px;
+  display: flex;
 }
 
 .navbar__logo {
-    width: 20%;
-    height: 100%;
-    display: flex;
-    justify-content: start;
-    align-items: center;
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
 
 .navbar__logo h1 {
-    font-size: 50px;
-    text-decoration: 2px underline #1a94e6;
-    color: #1f1f1f;
-    font-family: "Satisfy";
+  font-size: 50px;
+  text-decoration: 2px underline #1a94e6;
+  color: #1f1f1f;
+  font-family: "Satisfy";
 }
 
 .navbar__items {
-    width: 80%;
-    height: 100%;
-    display: flex;
-    justify-content: end;
-    align-items: center;
+  width: 80%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
 }
 
 .items__link {
-    margin-left: 5%;
-    text-decoration: none;
-    color: #1f1f1f;
-    font-weight: 600;
+  margin-left: 5%;
+  text-decoration: none;
+  color: #1f1f1f;
+  font-weight: 600;
 }
 
 .items__link:hover {
-    color: #1a94e6;
-    transition: 0.2s ease;
+  color: #1a94e6;
+  transition: 0.2s ease;
 }

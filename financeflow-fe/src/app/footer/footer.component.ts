@@ -8,14 +8,13 @@ import { DefaultaccountService } from '../shared/services/defaultaccount.service
   imports: [],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.css',
-  providers: [provideAnimations()]
+  providers: [provideAnimations()],
 })
 export class FooterComponent implements OnInit {
   public balance: number;
   public currencyCode: string;
 
-  constructor(private defaultAccountService: DefaultaccountService) {
-  }
+  constructor(private defaultAccountService: DefaultaccountService) {}
 
   ngOnInit(): void {
     this.defaultAccountService.getDefaultAccount().subscribe((response) => {
@@ -23,5 +22,4 @@ export class FooterComponent implements OnInit {
       this.currencyCode = response.currencyCode;
     });
   }
-
 }

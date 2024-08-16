@@ -1,14 +1,22 @@
 <div class="accounts">
-    <a href="#" class="accounts__button">Create account</a>
-    <div class="accounts__container">
-        <div class="container__item" *ngFor="let account of accounts">
-            <h1>{{account.name}}</h1>
-            <div class="item__container">
-                <h1>{{account.defaultBalance.toFixed(2)}}&nbsp;{{account.defaultCurrencyCode}}</h1>
-                <p class="container__smaller-text" *ngIf="account.currencyCode !== account.defaultCurrencyCode">
-                    {{account.balance.toFixed(2)}}&nbsp;{{account.currencyCode}}
-                </p>
-            </div>
-        </div>
+  <a href="#" class="accounts__button">Create account</a>
+  <div class="accounts__container">
+    <p *ngIf="showMessage">There are no accounts available.</p>
+    <div class="container__item" *ngFor="let account of accounts">
+      <h1>{{ account.name }}</h1>
+      <div class="item__container">
+        <h1>
+          {{ account.defaultBalance.toFixed(2) }}&nbsp;{{
+            account.defaultCurrencyCode
+          }}
+        </h1>
+        <p
+          class="container__smaller-text"
+          *ngIf="account.currencyCode !== account.defaultCurrencyCode"
+        >
+          {{ account.balance.toFixed(2) }}&nbsp;{{ account.currencyCode }}
+        </p>
+      </div>
     </div>
+  </div>
 </div>

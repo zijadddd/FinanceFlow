@@ -1,28 +1,28 @@
 .footer {
-    width: 80%;
-    height: 100px;
-    position: absolute;
-    bottom: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  width: 80%;
+  height: 100px;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .footer__button {
-    border-radius: 15px;
-    background-color: #1a94e6;
-    color: white;
-    text-decoration: none;
-    padding: 20px;
-    font-weight: bold;
+  border-radius: 15px;
+  background-color: #1a94e6;
+  color: white;
+  text-decoration: none;
+  padding: 20px;
+  font-weight: bold;
 }
 
 .footer__button:hover {
-    background-color: #1483cc;
-    color: white;
-    transition: 0.2s ease;
+  background-color: #1483cc;
+  color: white;
+  transition: 0.2s ease;
 }
 
 .footer h1 {
-    font-size: 20px;
+  font-size: 20px;
 }
