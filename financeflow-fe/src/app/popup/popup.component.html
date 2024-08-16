@@ -1,0 +1,9 @@
+<div
+  class="popup"
+  *ngIf="isVisible"
+  [ngStyle]="{ 'background-color': backgroundColor }"
+>
+  <img src="assets/success-icon.svg" *ngIf="type" />
+  <img src="assets/warning-icon.svg" *ngIf="!type" />
+  <p>{{ message }}</p>
+</div>

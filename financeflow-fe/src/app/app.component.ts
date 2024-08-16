@@ -4,6 +4,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AccountsComponent } from './accounts/accounts.component';
 import { FooterComponent } from './footer/footer.component';
 import { CommonModule } from '@angular/common';
+import { PopupComponent } from './popup/popup.component';
 
 @Component({
   selector: 'app-root',

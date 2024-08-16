@@ -8,6 +8,7 @@ import {
 import { catchError, Observable, throwError } from 'rxjs';
 import { CurrencyApi } from '../api/currency-api.constant';
 import { Currency } from '../models/currency.model';
+import { Message } from '../models/message.model';
 
 @Injectable({
   providedIn: 'root',
@@ -21,14 +22,14 @@ export class DefaultaccountService {
     );
   }
 
-  changeCurrencyCode(request: Currency): Observable<DefaultAccountResponse> {
-    return this.httpClient.post<DefaultAccountResponse>(
+  changeCurrencyCode(request: Currency): Observable<Message> {
+    return this.httpClient.post<Message>(
       DefaultAccountApi.CHANGE_CURRENCY_CODE,
       request
     );
   }
 
-  deleteAllData(): Observable<string> {
-    return this.httpClient.delete<string>(DefaultAccountApi.DELETE_ALL_DATA);
+  deleteAllData(): Observable<Message> {
+    return this.httpClient.delete<Message>(DefaultAccountApi.DELETE_ALL_DATA);
   }
 }

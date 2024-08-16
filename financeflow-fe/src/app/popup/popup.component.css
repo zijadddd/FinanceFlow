@@ -1,0 +1,22 @@
+.popup {
+  width: 300px;
+  height: 80px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.popup img {
+  width: 50px;
+  height: 50px;
+  margin: 0 10px;
+}
+
+.popup p {
+  color: white;
+  font-size: 15px;
+}

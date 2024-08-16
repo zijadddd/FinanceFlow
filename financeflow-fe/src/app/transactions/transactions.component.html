@@ -14,7 +14,9 @@
     </div>
   </div>
   <div class="transactions__container">
-    <p *ngIf="showMessage">There are no accounts available.</p>
+    <p *ngIf="transactions.length === 0">
+      There are no transactions available.
+    </p>
     <div class="container__item" *ngFor="let transaction of transactions">
       <div class="item__left-block">
         <p class="left-block__account">{{ transaction.accountName }}</p>
@@ -51,3 +53,8 @@
     </div>
   </div>
 </div>
+<app-popup
+  [message]="popupMessage"
+  [type]="popupType"
+  [isVisible]="isPopupVisible"
+></app-popup>

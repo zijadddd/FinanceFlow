@@ -1,7 +1,7 @@
 <div class="accounts">
   <a href="#" class="accounts__button">Create account</a>
   <div class="accounts__container">
-    <p *ngIf="showMessage">There are no accounts available.</p>
+    <p *ngIf="accounts.length === 0">There are no accounts available.</p>
     <div class="container__item" *ngFor="let account of accounts">
       <h1>{{ account.name }}</h1>
       <div class="item__container">
@@ -20,3 +20,8 @@
     </div>
   </div>
 </div>
+<app-popup
+  [message]="popupMessage"
+  [type]="popupType"
+  [isVisible]="isPopupVisible"
+></app-popup>
