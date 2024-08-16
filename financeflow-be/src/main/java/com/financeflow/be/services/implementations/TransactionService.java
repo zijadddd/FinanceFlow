@@ -12,10 +12,10 @@ import com.financeflow.be.repositories.AccountRepository;
 import com.financeflow.be.repositories.DefaultAccountRepository;
 import com.financeflow.be.repositories.TransactionRepository;
 import com.financeflow.be.services.interfaces.ITransactionService;
-import lombok.Builder;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class TransactionService implements ITransactionService {
     private final String uri = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/";
     private final RestTemplate restTemplate = new RestTemplate();
@@ -136,5 +137,11 @@ public class TransactionService implements ITransactionService {
         if (response.isEmpty()) throw new NoTransactionsForAccountException(id);
 
         return response;
+    }
+
+    @Override
+    public void deleteAllTransactions() {
+        transactionRepository.deleteAll();
+        transactionRepository.resetAutoIncrement();
     }
 }

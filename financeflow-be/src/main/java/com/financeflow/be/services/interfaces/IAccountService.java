@@ -12,4 +12,5 @@ import java.util.List;
 public interface IAccountService {
     List<AccountOut> getAll() throws AccountsNotFoundException, CurrencyDoesNotExistException;
     AccountOut create(AccountIn request) throws CurrencyDoesNotExistException;
+    void deleteAllAccounts();
 }

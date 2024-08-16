@@ -2,10 +2,7 @@ package com.financeflow.be.controllers;
 
 import com.financeflow.be.core.exceptions.CurrencyDoesNotExistException;
 import com.financeflow.be.core.exceptions.DefaultAccountNotFoundException;
-import com.financeflow.be.models.dto.AccountIn;
-import com.financeflow.be.models.dto.AccountOut;
-import com.financeflow.be.models.dto.DefaultAccountIn;
-import com.financeflow.be.models.dto.DefaultAccountOut;
+import com.financeflow.be.models.dto.*;
 import com.financeflow.be.services.implementations.DefaultAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,8 +24,15 @@ public class DefaultAccountController {
     }
 
     @PostMapping()
-    public ResponseEntity<String> changeCurrencyCode(@RequestBody DefaultAccountIn request) throws DefaultAccountNotFoundException, CurrencyDoesNotExistException {
-        String response = defaultAccountService.changeCurrency(request.getCurrencyCode());
+    public ResponseEntity<MessageOut> changeCurrencyCode(@RequestBody DefaultAccountIn request) throws DefaultAccountNotFoundException, CurrencyDoesNotExistException {
+        MessageOut response = defaultAccountService.changeCurrency(request.getCurrencyCode());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping()
+    public ResponseEntity<MessageOut> deleteAllData() {
+        MessageOut response = defaultAccountService.deleteAllData();
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

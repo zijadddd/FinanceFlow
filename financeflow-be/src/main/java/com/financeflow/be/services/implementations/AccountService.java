@@ -13,12 +13,14 @@ import com.financeflow.be.repositories.DefaultAccountRepository;
 import com.financeflow.be.services.interfaces.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class AccountService implements IAccountService {
 
     @Autowired
@@ -69,5 +71,11 @@ public class AccountService implements IAccountService {
         );
 
         return new AccountOut(account, defaultBalance, defaultAccount.getCurrencyCode());
+    }
+
+    @Override
+    public void deleteAllAccounts() {
+        accountRepository.deleteAll();
+        accountRepository.resetAutoIncrement();
     }
 }

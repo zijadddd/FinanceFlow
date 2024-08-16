@@ -5,6 +5,8 @@ import com.financeflow.be.core.exceptions.DefaultAccountNotFoundException;
 import com.financeflow.be.models.dao.DefaultAccount;
 import com.financeflow.be.models.dto.BalanceContainer;
 import com.financeflow.be.models.dto.DefaultAccountOut;
+import com.financeflow.be.models.dto.MessageOut;
+import com.financeflow.be.repositories.AccountRepository;
 import com.financeflow.be.repositories.DefaultAccountRepository;
 import com.financeflow.be.services.interfaces.IDefaultAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,11 @@ public class DefaultAccountService implements IDefaultAccountService {
     @Autowired
     private TransactionService transactionService;
 
+    @Autowired
+    private AccountRepository accountRepository;
+    @Autowired
+    private AccountService accountService;
+
     @Override
     public DefaultAccountOut getDefaultAccount() {
         DefaultAccount defaultAccount = defaultAccountRepository.findById(1).get();
@@ -28,7 +35,7 @@ public class DefaultAccountService implements IDefaultAccountService {
     }
 
     @Override
-    public String changeCurrency(String currencyCode) throws DefaultAccountNotFoundException, CurrencyDoesNotExistException {
+    public MessageOut changeCurrency(String currencyCode) throws DefaultAccountNotFoundException, CurrencyDoesNotExistException {
         DefaultAccount defaultAccount = defaultAccountRepository.findById(1).orElseThrow(DefaultAccountNotFoundException::new);
         Double newBalance = transactionService.convertFromOneCurrencyToOther(
                 new BalanceContainer(defaultAccount.getBalance(), defaultAccount.getCurrencyCode()),
@@ -37,6 +44,13 @@ public class DefaultAccountService implements IDefaultAccountService {
         defaultAccount.setBalance(newBalance);
         defaultAccount.setCurrencyCode(currencyCode);
         defaultAccountRepository.save(defaultAccount);
-        return "Currency successfully changed.";
+        return new MessageOut("Currency successfully changed.");
+    }
+
+    @Override
+    public MessageOut deleteAllData() {
+        accountService.deleteAllAccounts();
+        transactionService.deleteAllTransactions();
+        return new MessageOut("All data has been deleted.");
     }
 }
