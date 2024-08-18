@@ -12,5 +12,4 @@ export class AccountRequest {
   name: string;
   balance: number;
   currencyCode: string;
-  defaultAccountId: number;
 }

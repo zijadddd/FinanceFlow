@@ -9,5 +9,4 @@ public class AccountIn {
     private String name;
     private Double balance;
     private String currencyCode;
-    private Integer defaultAccountId;
 }

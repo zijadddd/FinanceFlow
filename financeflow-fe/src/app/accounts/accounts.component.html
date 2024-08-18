@@ -1,5 +1,7 @@
 <div class="accounts">
-  <a href="#" class="accounts__button">Create account</a>
+  <a href="#" class="accounts__button" (click)="createAccountModalOpen()"
+    >Create account</a
+  >
   <div class="accounts__container">
     <p *ngIf="accounts.length === 0">There are no accounts available.</p>
     <div class="container__item" *ngFor="let account of accounts">
@@ -20,6 +22,55 @@
     </div>
   </div>
 </div>
+
+<div class="create-account-modal" *ngIf="createAccountBtnClicked">
+  <div class="create-account-modal__form">
+    <h1>Create account</h1>
+    <form class="form" [formGroup]="createAccountForm" (ngSubmit)="onSubmit()">
+      <label for="accountName">Name:</label>
+      <input
+        type="text"
+        id="accountName"
+        formControlName="accountName"
+        name="Account name"
+        class="form__input"
+      />
+      <label for="currency">Currency:</label>
+
+      <select
+        id="currency"
+        formControlName="currency"
+        class="form__select"
+        [(ngModel)]="defaultSelectedCurrency"
+      >
+        <option *ngFor="let currency of currencies" [value]="currency['key']">
+          {{ currency["value"] }}
+        </option>
+      </select>
+
+      <label for="balance">Balance:</label>
+      <input
+        type="text"
+        id="balance"
+        name="balance"
+        class="form__input"
+        formControlName="balance"
+      />
+      <div class="form__btn-container">
+        <a
+          href="javascript:void(0)"
+          class="btn-container__btn-cancel"
+          (click)="cancelCreateAccountClicked()"
+          >Cancel</a
+        >
+        <button class="btn-container__btn-accept" type="submit">
+          Create account
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <app-popup
   [message]="popupMessage"
   [type]="popupType"

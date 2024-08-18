@@ -1,3 +1,7 @@
-export class Currency {
+export interface Currency {
+  [key: string]: string;
+}
+
+export class CurrencyRequest {
   currencyCode: string;
 }

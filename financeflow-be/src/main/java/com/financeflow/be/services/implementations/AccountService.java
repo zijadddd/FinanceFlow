@@ -59,7 +59,7 @@ public class AccountService implements IAccountService {
         account.setCurrencyCode(request.getCurrencyCode());
         account.setCreatedAt(LocalDateTime.now());
 
-        DefaultAccount defaultAccount = defaultAccountRepository.findById(request.getDefaultAccountId()).get();
+        DefaultAccount defaultAccount = defaultAccountRepository.findById(1).get();
 
         account.setDefaultAccount(defaultAccount);
 
@@ -69,6 +69,9 @@ public class AccountService implements IAccountService {
                 new BalanceContainer(account.getBalance(), account.getCurrencyCode()),
                 defaultAccount.getCurrencyCode()
         );
+
+        defaultAccount.setBalance(defaultAccount.getBalance() + defaultBalance);
+        defaultAccountRepository.save(defaultAccount);
 
         return new AccountOut(account, defaultBalance, defaultAccount.getCurrencyCode());
     }

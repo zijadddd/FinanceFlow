@@ -7,17 +7,18 @@
         <div class="button__arrow"></div>
       </button>
       <div class="dropdown__content">
-        <ng-container *ngFor="let currency of currencies | keyvalue">
+        <ng-container *ngFor="let currency of currencies">
           <a
             href="javascript:void(0)"
-            (click)="changeDefaultCurrency(currency.key.toString())"
+            (click)="changeDefaultCurrency(currency['key'].toString())"
           >
-            {{ currency.value }}
+            {{ currency["value"] }}
           </a>
         </ng-container>
       </div>
     </div>
   </div>
+
   <div class="settings__delete-all-data">
     <p>
       Deleting all your data will permanently remove all your information,

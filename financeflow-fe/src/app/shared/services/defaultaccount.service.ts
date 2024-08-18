@@ -1,13 +1,9 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DefaultAccountApi } from '../api/default-account-api.constant';
-import {
-  DefaultAccountRequest,
-  DefaultAccountResponse,
-} from '../models/defaultaccount.model';
-import { catchError, Observable, throwError } from 'rxjs';
-import { CurrencyApi } from '../api/currency-api.constant';
-import { Currency } from '../models/currency.model';
+import { DefaultAccountResponse } from '../models/defaultaccount.model';
+import { Observable } from 'rxjs';
+import { CurrencyRequest } from '../models/currency.model';
 import { Message } from '../models/message.model';
 
 @Injectable({
@@ -22,7 +18,7 @@ export class DefaultaccountService {
     );
   }
 
-  changeCurrencyCode(request: Currency): Observable<Message> {
+  changeCurrencyCode(request: CurrencyRequest): Observable<Message> {
     return this.httpClient.post<Message>(
       DefaultAccountApi.CHANGE_CURRENCY_CODE,
       request

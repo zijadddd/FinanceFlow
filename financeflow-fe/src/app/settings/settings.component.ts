@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DefaultaccountService } from '../shared/services/defaultaccount.service';
 import { DefaultAccountResponse } from '../shared/models/defaultaccount.model';
 import { HttpClient } from '@angular/common/http';
-import { Currency } from '../shared/models/currency.model';
+import { Currency, CurrencyRequest } from '../shared/models/currency.model';
 import { CurrencyService } from '../shared/services/currency.service';
 import { NgFor, NgIf } from '@angular/common';
 import { KeyValuePipe } from '@angular/common';
@@ -22,7 +22,7 @@ import { CommunicationService } from '../shared/services/communication.service';
 export class SettingsComponent implements OnInit {
   public exchangeRateChanged: string;
   public defaultAccount: DefaultAccountResponse = new DefaultAccountResponse();
-  public currencies: Currency[];
+  public currencies: Currency[] = [];
   public deleteAllDataBtnClicked: boolean = false;
   public popupMessage: string = '';
   public popupType: boolean;
@@ -55,7 +55,7 @@ export class SettingsComponent implements OnInit {
   }
 
   changeDefaultCurrency(currencyCode: string): void {
-    const currency: Currency = new Currency();
+    const currency: CurrencyRequest = new CurrencyRequest();
     currency.currencyCode = currencyCode.toUpperCase();
     this.defaultAccountService
       .changeCurrencyCode(currency)
