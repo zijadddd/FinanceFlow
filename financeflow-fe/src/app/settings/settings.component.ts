@@ -9,6 +9,7 @@ import { KeyValuePipe } from '@angular/common';
 import { CurrencyApi } from '../shared/api/currency-api.constant';
 import { PopupComponent } from '../popup/popup.component';
 import { CommunicationService } from '../shared/services/communication.service';
+import { WhichAction } from '../shared/models/which-action.model';
 
 @Component({
   selector: 'app-settings',
@@ -101,6 +102,6 @@ export class SettingsComponent implements OnInit {
   }
 
   notifySibling() {
-    this.communicationService.callMethod();
+    this.communicationService.updateFooter();
   }
 }

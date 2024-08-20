@@ -4,7 +4,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AccountsComponent } from './accounts/accounts.component';
 import { FooterComponent } from './footer/footer.component';
 import { CommonModule } from '@angular/common';
-import { PopupComponent } from './popup/popup.component';
+import { TransactionModalComponent } from './transaction-modal/transaction-modal.component';
+import { AccountModalComponent } from './account-modal/account-modal.component';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,8 @@ import { PopupComponent } from './popup/popup.component';
     NavbarComponent,
     AccountsComponent,
     FooterComponent,
+    TransactionModalComponent,
+    AccountModalComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

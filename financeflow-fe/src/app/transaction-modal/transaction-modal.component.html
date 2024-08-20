@@ -1,0 +1,70 @@
+<div class="commit-transaction-modal" *ngIf="commitTransactionBtnClicked">
+  <div class="commit-transaction-modal__form">
+    <h1>Create transaction</h1>
+    <form
+      class="form"
+      [formGroup]="commitTransactionForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <label for="description">Description:</label>
+      <input
+        type="text"
+        id="description"
+        formControlName="description"
+        name="Description"
+        class="form__input"
+      />
+      <label for="type">Type:</label>
+
+      <select id="type" formControlName="type" class="form__select">
+        <option *ngFor="let type of expenseTypes" [value]="type">
+          {{ type }}
+        </option>
+      </select>
+
+      <div class="form__type-balance-container">
+        <div>
+          <label for="account">Account:</label>
+
+          <select
+            id="account"
+            formControlName="account"
+            class="form__select"
+            [(ngModel)]="defaultSelectedAccount"
+          >
+            <option *ngFor="let account of accounts" [value]="account.id">
+              {{ account.name }}
+            </option>
+          </select>
+        </div>
+        <div>
+          <label for="amount">Amount:</label>
+          <input
+            type="text"
+            id="amount"
+            name="amount"
+            class="form__input"
+            formControlName="amount"
+          />
+        </div>
+      </div>
+      <div class="form__btn-container">
+        <a
+          href="javascript:void(0)"
+          class="btn-container__btn-cancel"
+          (click)="closeCommitTransactionModalClicked()"
+          >Cancel</a
+        >
+        <button class="btn-container__btn-accept" type="submit">
+          Create transaction
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-popup
+  [message]="popupMessage"
+  [type]="popupType"
+  [isVisible]="isPopupVisible"
+></app-popup>

@@ -26,3 +26,7 @@
 .footer h1 {
   font-size: 20px;
 }
+
+.form__type-balance-container {
+  display: flex;
+}

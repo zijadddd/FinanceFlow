@@ -56,7 +56,7 @@ public class AccountService implements IAccountService {
         Account account = new Account();
         account.setName(request.getName());
         account.setBalance(request.getBalance());
-        account.setCurrencyCode(request.getCurrencyCode());
+        account.setCurrencyCode(request.getCurrencyCode().toUpperCase());
         account.setCreatedAt(LocalDateTime.now());
 
         DefaultAccount defaultAccount = defaultAccountRepository.findById(1).get();

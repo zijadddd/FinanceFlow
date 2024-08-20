@@ -1,4 +1,9 @@
 <div class="footer">
-  <a href="#" class="footer__button">Create transaction</a>
+  <a
+    href="javascript:void(0)"
+    class="footer__button"
+    (click)="commitTransactionModalOpen()"
+    >Create transaction</a
+  >
   <h1>Available: {{ balance?.toFixed(2) }}&nbsp;{{ currencyCode }}</h1>
 </div>
