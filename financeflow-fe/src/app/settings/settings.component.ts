@@ -9,7 +9,7 @@ import { KeyValuePipe } from '@angular/common';
 import { CurrencyApi } from '../shared/api/currency-api.constant';
 import { PopupComponent } from '../popup/popup.component';
 import { CommunicationService } from '../shared/services/communication.service';
-import { WhichAction } from '../shared/models/which-action.model';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-settings',
@@ -33,10 +33,13 @@ export class SettingsComponent implements OnInit {
     private defaultAccountService: DefaultaccountService,
     private httpClient: HttpClient,
     private currencyService: CurrencyService,
-    private communicationService: CommunicationService
+    private communicationService: CommunicationService,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle('FinanceFlow - Settings');
+
     this.getDefaultAccount();
 
     this.currencyService.getCurrencies().subscribe((response) => {

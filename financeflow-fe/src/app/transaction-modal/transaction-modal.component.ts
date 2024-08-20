@@ -34,6 +34,7 @@ export class TransactionModalComponent implements OnInit {
   public commitTransactionBtnClicked: boolean = false;
   public commitTransactionForm: FormGroup;
   public defaultSelectedAccount = 1;
+  public defaultSelectedExpence = ExpenseType.TRANSFER;
 
   public popupMessage: string = '';
   public popupType: boolean;
@@ -53,7 +54,7 @@ export class TransactionModalComponent implements OnInit {
 
     this.commitTransactionForm = this.formBuilder.group({
       description: [''],
-      type: ['Transfer'],
+      type: [''],
       account: [''],
       amount: [''],
     });
@@ -66,6 +67,9 @@ export class TransactionModalComponent implements OnInit {
   }
 
   commitTransactionModalOpen() {
+    this.accountService.getAllAccounts().subscribe((response) => {
+      this.accounts = response;
+    });
     this.commitTransactionBtnClicked = true;
   }
 
@@ -105,6 +109,8 @@ export class TransactionModalComponent implements OnInit {
         this.defaultSelectedAccount = 1;
         this.commitTransactionBtnClicked = false;
 
+        this.communicationService.updateAccountsList();
+        this.communicationService.updateTransactionsList();
         this.communicationService.updateFooter();
         setTimeout(() => {
           this.isPopupVisible = false;

@@ -7,6 +7,8 @@ import { PopupComponent } from '../popup/popup.component';
 import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommunicationService } from '../shared/services/communication.service';
+import { Title } from '@angular/platform-browser';
+import { WhichAction } from '../shared/models/which-action.model';
 
 @Component({
   selector: 'app-accounts',
@@ -25,10 +27,13 @@ export class AccountsComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    private communicationService: CommunicationService
+    private communicationService: CommunicationService,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle('FinanceFlow - Accounts');
+
     this.accountService
       .getAllAccounts()
       .pipe(
@@ -46,10 +51,21 @@ export class AccountsComponent implements OnInit {
       .subscribe((response: AccountResponse[]) => {
         this.accounts = response;
       });
+
+    this.communicationService.action$.subscribe((action) => {
+      if (action === WhichAction.UPDATE_ACCOUNTS) {
+        this.updateAccountsList();
+      }
+    });
   }
 
   createAccountModalOpen() {
-    console.log('usao 1');
     this.communicationService.openCreateAccountModal();
+  }
+
+  updateAccountsList() {
+    this.accountService.getAllAccounts().subscribe((response) => {
+      this.accounts = response;
+    });
   }
 }

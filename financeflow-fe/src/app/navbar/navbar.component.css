@@ -13,10 +13,10 @@
 }
 
 .navbar__logo h1 {
-  font-size: 50px;
-  text-decoration: 2px underline #1a94e6;
-  color: #1f1f1f;
-  font-family: "Satisfy";
+  font-size: 40px;
+  text-decoration: 2px underline #262c78;
+  color: white;
+  font-family: "Montserrat";
 }
 
 .navbar__items {
@@ -30,11 +30,12 @@
 .items__link {
   margin-left: 5%;
   text-decoration: none;
-  color: #1f1f1f;
+  color: white;
   font-weight: 600;
 }
 
 .items__link:hover {
-  color: #1a94e6;
+  color: #262c78;
   transition: 0.2s ease;
+  cursor: pointer;
 }

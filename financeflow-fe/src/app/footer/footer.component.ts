@@ -28,6 +28,12 @@ export class FooterComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDefaultAccount();
+
+    this.communicationService.action$.subscribe((action) => {
+      if (action === WhichAction.UPDATE_FOOTER) {
+        this.getDefaultAccount();
+      }
+    });
   }
 
   getDefaultAccount() {

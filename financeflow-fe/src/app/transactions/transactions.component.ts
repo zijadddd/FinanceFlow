@@ -8,6 +8,9 @@ import { AccountResponse } from '../shared/models/account.model';
 import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PopupComponent } from '../popup/popup.component';
+import { Title } from '@angular/platform-browser';
+import { CommunicationService } from '../shared/services/communication.service';
+import { WhichAction } from '../shared/models/which-action.model';
 
 @Component({
   selector: 'app-transactions',
@@ -29,27 +32,13 @@ export class TransactionsComponent implements OnInit {
 
   constructor(
     private transactionService: TransactionService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private titleService: Title,
+    private communicationService: CommunicationService
   ) {}
 
   ngOnInit(): void {
-    this.transactionService
-      .getAllTransactions()
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          this.popupMessage = error.error.text;
-          this.popupType = false;
-          this.isPopupVisible = true;
-
-          setTimeout(() => {
-            this.isPopupVisible = false;
-          }, 5000);
-          return throwError(() => error);
-        })
-      )
-      .subscribe((response: TransactionResponse[]) => {
-        this.transactions = response;
-      });
+    this.titleService.setTitle('FinanceFlow - Transactions');
 
     this.accountService
       .getAllAccounts()
@@ -68,6 +57,30 @@ export class TransactionsComponent implements OnInit {
       .subscribe((response: AccountResponse[]) => {
         this.accounts = response;
       });
+
+    this.transactionService
+      .getAllTransactions()
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          this.popupMessage = error.error.text;
+          this.popupType = false;
+          this.isPopupVisible = true;
+
+          setTimeout(() => {
+            this.isPopupVisible = false;
+          }, 5000);
+          return throwError(() => error);
+        })
+      )
+      .subscribe((response: TransactionResponse[]) => {
+        this.transactions = response;
+      });
+
+    this.communicationService.action$.subscribe((action) => {
+      if (action === WhichAction.UPDATE_TRANSACTIONS) {
+        this.updateTransactionsList();
+      }
+    });
   }
 
   getAllTransactionsForAccount(id: number) {
@@ -124,5 +137,11 @@ export class TransactionsComponent implements OnInit {
         this.dropdownText = 'All accounts';
         this.accountHolder = null;
       });
+  }
+
+  updateTransactionsList() {
+    this.transactionService.getAllTransactions().subscribe((response) => {
+      this.transactions = response;
+    });
   }
 }

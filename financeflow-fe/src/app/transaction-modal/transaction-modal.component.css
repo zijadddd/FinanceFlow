@@ -4,7 +4,7 @@
   height: 100vh;
   background-color: #1f1f1fa8;
   position: absolute;
-  top: 50%;
+  top: 49.9%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
@@ -15,7 +15,7 @@
 }
 
 .commit-transaction-modal__form {
-  background-color: #f9f9f9;
+  background-color: #16171b;
   padding: 40px;
   border-radius: 20px;
 }
@@ -40,6 +40,8 @@ select {
   padding: 10px;
   border-radius: 15px;
   font-size: 15px;
+  background-color: #212528;
+  color: white;
 }
 
 .form__input:focus {
@@ -52,10 +54,10 @@ select {
   width: 100%;
   font-size: 1.15rem;
   padding: 10px;
-  background-color: #fff;
+  background-color: #212528;
+  color: white;
   border: none;
   border-radius: 15px;
-  color: #1f1f1f;
   cursor: pointer;
   font-size: 15px;
   appearance: none;
@@ -98,13 +100,13 @@ select {
 
 .btn-container__btn-accept {
   border-radius: 10px;
-  background-color: #1a94e6;
+  background-color: #262c78;
   color: white;
   text-decoration: none;
   padding: 10px;
   font-weight: bold;
   border: none;
-  font-family: "Space Grotesk";
+  font-family: "Montserrat";
   font-size: 15px;
   display: flex;
   justify-content: center;
@@ -113,7 +115,7 @@ select {
 
 .btn-container__btn-accept:hover {
   transition: 0.2s ease;
-  background-color: #1483cc;
+  background-color: #262c78d2;
   cursor: pointer;
 }
 

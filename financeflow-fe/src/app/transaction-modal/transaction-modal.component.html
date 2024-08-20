@@ -16,7 +16,12 @@
       />
       <label for="type">Type:</label>
 
-      <select id="type" formControlName="type" class="form__select">
+      <select
+        id="type"
+        formControlName="type"
+        class="form__select"
+        [(ngModel)]="defaultSelectedExpence"
+      >
         <option *ngFor="let type of expenseTypes" [value]="type">
           {{ type }}
         </option>

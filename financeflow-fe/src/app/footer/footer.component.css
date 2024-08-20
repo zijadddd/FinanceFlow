@@ -10,7 +10,7 @@
 
 .footer__button {
   border-radius: 15px;
-  background-color: #1a94e6;
+  background-color: #262c78;
   color: white;
   text-decoration: none;
   padding: 20px;
@@ -18,7 +18,7 @@
 }
 
 .footer__button:hover {
-  background-color: #1483cc;
+  background-color: #262c78d2;
   color: white;
   transition: 0.2s ease;
 }

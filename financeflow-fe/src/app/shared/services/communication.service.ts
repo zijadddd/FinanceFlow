@@ -18,7 +18,14 @@ export class CommunicationService {
   }
 
   openCreateAccountModal() {
-    console.log('usao 2');
     this.actionSource.next(WhichAction.CREATE_ACCOUNT);
+  }
+
+  updateAccountsList() {
+    this.actionSource.next(WhichAction.UPDATE_ACCOUNTS);
+  }
+
+  updateTransactionsList() {
+    this.actionSource.next(WhichAction.UPDATE_TRANSACTIONS);
   }
 }

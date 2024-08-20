@@ -61,16 +61,13 @@ export class AccountModalComponent implements OnInit {
     });
 
     this.communicationService.action$.subscribe((action) => {
-      console.log('usao 3');
       if (action === WhichAction.CREATE_ACCOUNT) {
-        console.log('usao 4');
         this.createAccountModalOpen();
       }
     });
   }
 
   createAccountModalOpen() {
-    console.log('usao 5');
     this.createAccountBtnClicked = true;
   }
 
@@ -102,7 +99,8 @@ export class AccountModalComponent implements OnInit {
         this.popupMessage = 'Account is successfully created.';
         this.popupType = true;
         this.isPopupVisible = true;
-        //this.accounts.push(response);
+        this.communicationService.updateAccountsList();
+        this.communicationService.updateFooter();
 
         this.createAccountForm.reset();
         this.defaultSelectedCurrency = 'eur';
