@@ -5,6 +5,7 @@ import com.financeflow.be.core.exceptions.*;
 import com.financeflow.be.models.dao.Account;
 import com.financeflow.be.models.dao.DefaultAccount;
 import com.financeflow.be.models.dao.Transaction;
+import com.financeflow.be.models.dto.AccountOut;
 import com.financeflow.be.models.dto.BalanceContainer;
 import com.financeflow.be.models.dto.TransactionIn;
 import com.financeflow.be.models.dto.TransactionOut;
@@ -134,7 +135,9 @@ public class TransactionService implements ITransactionService {
                     account.getCurrencyCode(), defaultAmount, defaultAccount.getCurrencyCode(), transaction.getProcessedAt().toString()));
         }
 
-        if (response.isEmpty()) throw new NoTransactionsForAccountException(id);
+        Account account = accountRepository.findById(id).get();
+
+        if (response.isEmpty()) throw new NoTransactionsForAccountException(account.getName());
 
         return response;
     }
