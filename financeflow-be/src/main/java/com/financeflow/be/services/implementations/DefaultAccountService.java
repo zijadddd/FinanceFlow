@@ -51,6 +51,11 @@ public class DefaultAccountService implements IDefaultAccountService {
     public MessageOut deleteAllData() {
         accountService.deleteAllAccounts();
         transactionService.deleteAllTransactions();
+
+        DefaultAccount defaultAccount = defaultAccountRepository.findById(1).get();
+        defaultAccount.setBalance(0.0);
+        defaultAccountRepository.save(defaultAccount);
+
         return new MessageOut("All data has been deleted.");
     }
 }
