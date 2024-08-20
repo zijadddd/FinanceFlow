@@ -94,6 +94,8 @@ export class SettingsComponent implements AfterViewInit {
       this.popupType = true;
       this.isPopupVisible = true;
 
+      this.communicationService.updateFooter();
+
       setTimeout(() => {
         this.isPopupVisible = false;
       }, 5000);

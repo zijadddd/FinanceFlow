@@ -11,11 +11,12 @@ import { PopupComponent } from '../popup/popup.component';
 import { Title } from '@angular/platform-browser';
 import { CommunicationService } from '../shared/services/communication.service';
 import { WhichAction } from '../shared/models/which-action.model';
+import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
   selector: 'app-transactions',
   standalone: true,
-  imports: [NgFor, NgIf, PopupComponent],
+  imports: [NgFor, NgIf, PopupComponent, LoaderComponent],
   templateUrl: './transactions.component.html',
   styleUrl: './transactions.component.css',
   encapsulation: ViewEncapsulation.ShadowDom,
@@ -29,6 +30,7 @@ export class TransactionsComponent implements OnInit {
   public popupMessage: string = '';
   public popupType: boolean;
   public isPopupVisible: boolean;
+  public isLoaderVisible: boolean = false;
 
   constructor(
     private transactionService: TransactionService,
@@ -38,32 +40,25 @@ export class TransactionsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isLoaderVisible = true;
     this.titleService.setTitle('FinanceFlow - Transactions');
 
-    this.accountService.getAllAccounts().subscribe(
-      (response: AccountResponse[]) => {
+    this.accountService
+      .getAllAccounts()
+      .subscribe((response: AccountResponse[]) => {
         this.accounts = response;
-      },
-      (error: HttpErrorResponse) => {
-        this.popupMessage = error.error.text;
-        this.popupType = false;
-        this.isPopupVisible = true;
-
-        setTimeout(() => {
-          this.isPopupVisible = false;
-        }, 5000);
-        return throwError(() => error);
-      }
-    );
+      });
 
     this.transactionService.getAllTransactions().subscribe(
       (response: TransactionResponse[]) => {
         this.transactions = response;
+        this.isLoaderVisible = false;
       },
       (error: HttpErrorResponse) => {
         this.popupMessage = error.error.text;
         this.popupType = false;
         this.isPopupVisible = true;
+        this.isLoaderVisible = false;
 
         setTimeout(() => {
           this.isPopupVisible = false;

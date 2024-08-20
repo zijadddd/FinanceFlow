@@ -1,5 +1,5 @@
 <div class="transactions">
-  <div class="transactions__dropdown">
+  <div class="transactions__dropdown" *ngIf="!isLoaderVisible">
     <button class="dropdown__btn">
       {{ dropdownText }}
       <div class="dropdown__arrow"></div>
@@ -13,7 +13,7 @@
       >
     </div>
   </div>
-  <div class="transactions__container">
+  <div class="transactions__container" *ngIf="!isLoaderVisible">
     <p *ngIf="transactions.length === 0">
       There are no transactions available.
     </p>
@@ -53,6 +53,7 @@
     </div>
   </div>
 </div>
+<app-loader [isVisible]="isLoaderVisible"></app-loader>
 <app-popup
   [message]="popupMessage"
   [type]="popupType"

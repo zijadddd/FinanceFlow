@@ -9,11 +9,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { CommunicationService } from '../shared/services/communication.service';
 import { Title } from '@angular/platform-browser';
 import { WhichAction } from '../shared/models/which-action.model';
+import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
   selector: 'app-accounts',
   standalone: true,
-  imports: [NgFor, NgIf, PopupComponent],
+  imports: [NgFor, NgIf, PopupComponent, LoaderComponent],
   templateUrl: './accounts.component.html',
   styleUrl: './accounts.component.css',
   encapsulation: ViewEncapsulation.ShadowDom,
@@ -24,6 +25,7 @@ export class AccountsComponent implements OnInit {
   public popupMessage: string = '';
   public popupType: boolean;
   public isPopupVisible: boolean;
+  public isLoaderVisible: boolean = false;
 
   constructor(
     private accountService: AccountService,
@@ -32,16 +34,19 @@ export class AccountsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isLoaderVisible = true;
     this.titleService.setTitle('FinanceFlow - Accounts');
 
     this.accountService.getAllAccounts().subscribe(
       (response: AccountResponse[]) => {
         this.accounts = response;
+        this.isLoaderVisible = false;
       },
       (error: HttpErrorResponse) => {
         this.popupMessage = error.error.text;
         this.popupType = false;
         this.isPopupVisible = true;
+        this.isLoaderVisible = false;
 
         setTimeout(() => {
           this.isPopupVisible = false;
