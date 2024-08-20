@@ -16,17 +16,19 @@
 
 .commit-transaction-modal__form {
   background-color: #16171b;
-  padding: 40px;
-  border-radius: 20px;
+  border-radius: 10px;
+  padding: 20px;
 }
 
 .commit-transaction-modal__form label,
 input,
 select {
-  margin-top: 5px;
+  margin: 5px;
+  width: 90%;
 }
 
 .commit-transaction-modal__form h1 {
+  margin: 5px;
   margin-bottom: 25px;
 }
 
@@ -38,26 +40,24 @@ select {
 .form__input {
   border: none;
   padding: 10px;
-  border-radius: 15px;
+  border-radius: 10px;
   font-size: 15px;
   background-color: #212528;
   color: white;
 }
 
 .form__input:focus {
-  border-color: 3px solid #1a94e6;
-  outline: none;
+  outline: 2px solid #262c78;
 }
 
 .form__select {
   appearance: none;
-  width: 100%;
   font-size: 1.15rem;
   padding: 10px;
   background-color: #212528;
   color: white;
   border: none;
-  border-radius: 15px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 15px;
   appearance: none;
@@ -65,6 +65,10 @@ select {
   background-repeat: no-repeat;
   background-position: right 0.7rem top 50%;
   background-size: 0.65rem auto;
+}
+
+.form__select:focus {
+  outline: 2px solid #262c78;
 }
 
 .form__select::before,
@@ -79,14 +83,14 @@ select {
 .form__select::before {
   border-left: var(--size) solid transparent;
   border-right: var(--size) solid transparent;
-  border-bottom: var(--size) solid black;
+  border-bottom: var(--size) solid #212528;
   top: 40%;
 }
 
 .form__select::after {
   border-left: var(--size) solid transparent;
   border-right: var(--size) solid transparent;
-  border-top: var(--size) solid black;
+  border-top: var(--size) solid #212528;
   top: 55%;
 }
 
@@ -95,6 +99,7 @@ select {
 }
 
 .form__btn-container {
+  margin: 5px;
   display: flex;
 }
 

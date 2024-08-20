@@ -32,6 +32,6 @@ export class PopupComponent implements OnInit, OnChanges {
   }
 
   private updateBackgroundColor() {
-    this.backgroundColor = this.type ? '#4caf50' : '#d32f2f';
+    this.backgroundColor = this.type ? '#49CA3E' : '#d32f2f';
   }
 }

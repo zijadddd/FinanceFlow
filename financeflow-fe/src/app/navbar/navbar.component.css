@@ -14,7 +14,7 @@
 
 .navbar__logo h1 {
   font-size: 40px;
-  text-decoration: 2px underline #262c78;
+  text-decoration: 2px underline #6a68f9;
   color: white;
   font-family: "Montserrat";
 }
@@ -35,7 +35,7 @@
 }
 
 .items__link:hover {
-  color: #262c78;
+  color: #6a68f9;
   transition: 0.2s ease;
   cursor: pointer;
 }

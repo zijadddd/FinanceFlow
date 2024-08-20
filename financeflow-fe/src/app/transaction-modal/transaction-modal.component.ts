@@ -84,23 +84,8 @@ export class TransactionModalComponent implements OnInit {
     request.description = this.commitTransactionForm.value.description;
     request.expense = this.commitTransactionForm.value.type;
 
-    this.transactionService
-      .commitTransaction(request)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          this.popupMessage = error.error.text;
-          this.popupType = false;
-          this.isPopupVisible = true;
-
-          this.commitTransactionBtnClicked = false;
-
-          setTimeout(() => {
-            this.isPopupVisible = false;
-          }, 5000);
-          return throwError(() => error);
-        })
-      )
-      .subscribe((response: TransactionResponse) => {
+    this.transactionService.commitTransaction(request).subscribe(
+      (response: TransactionResponse) => {
         this.popupMessage = 'Transaction is successfully comitted.';
         this.popupType = true;
         this.isPopupVisible = true;
@@ -115,6 +100,19 @@ export class TransactionModalComponent implements OnInit {
         setTimeout(() => {
           this.isPopupVisible = false;
         }, 5000);
-      });
+      },
+      (error: HttpErrorResponse) => {
+        this.popupMessage = error.error.text;
+        this.popupType = false;
+        this.isPopupVisible = true;
+
+        this.commitTransactionBtnClicked = false;
+
+        setTimeout(() => {
+          this.isPopupVisible = false;
+        }, 5000);
+        return throwError(() => error);
+      }
+    );
   }
 }

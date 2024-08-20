@@ -4,7 +4,6 @@ import { DefaultaccountService } from '../shared/services/defaultaccount.service
 import { CommunicationService } from '../shared/services/communication.service';
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TransactionService } from '../shared/services/transaction.service';
 import { PopupComponent } from '../popup/popup.component';
 import { WhichAction } from '../shared/models/which-action.model';
 
@@ -22,8 +21,7 @@ export class FooterComponent implements OnInit {
 
   constructor(
     private defaultAccountService: DefaultaccountService,
-    private communicationService: CommunicationService,
-    private transactionService: TransactionService
+    private communicationService: CommunicationService
   ) {}
 
   ngOnInit(): void {

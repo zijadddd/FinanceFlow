@@ -81,21 +81,8 @@ export class AccountModalComponent implements OnInit {
     request.balance = this.createAccountForm.value.balance;
     request.currencyCode = this.createAccountForm.value.currency;
 
-    this.accountService
-      .createAccount(request)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          this.popupMessage = error.error.text;
-          this.popupType = false;
-          this.isPopupVisible = true;
-
-          setTimeout(() => {
-            this.isPopupVisible = false;
-          }, 5000);
-          return throwError(() => error);
-        })
-      )
-      .subscribe((response: AccountResponse) => {
+    this.accountService.createAccount(request).subscribe(
+      (response: AccountResponse) => {
         this.popupMessage = 'Account is successfully created.';
         this.popupType = true;
         this.isPopupVisible = true;
@@ -109,6 +96,17 @@ export class AccountModalComponent implements OnInit {
         setTimeout(() => {
           this.isPopupVisible = false;
         }, 5000);
-      });
+      },
+      (error: HttpErrorResponse) => {
+        this.popupMessage = error.error.text;
+        this.popupType = false;
+        this.isPopupVisible = true;
+
+        setTimeout(() => {
+          this.isPopupVisible = false;
+        }, 5000);
+        return throwError(() => error);
+      }
+    );
   }
 }

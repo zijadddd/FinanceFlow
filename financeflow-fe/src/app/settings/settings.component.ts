@@ -1,4 +1,9 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { DefaultaccountService } from '../shared/services/defaultaccount.service';
 import { DefaultAccountResponse } from '../shared/models/defaultaccount.model';
 import { HttpClient } from '@angular/common/http';
@@ -20,7 +25,7 @@ import { Title } from '@angular/platform-browser';
   encapsulation: ViewEncapsulation.ShadowDom,
   providers: [KeyValuePipe],
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements AfterViewInit {
   public exchangeRateChanged: string;
   public defaultAccount: DefaultAccountResponse = new DefaultAccountResponse();
   public currencies: Currency[] = [];
@@ -37,25 +42,27 @@ export class SettingsComponent implements OnInit {
     private titleService: Title
   ) {}
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.titleService.setTitle('FinanceFlow - Settings');
 
-    this.getDefaultAccount();
+    this.defaultAccountService.getDefaultAccount().subscribe((response) => {
+      this.defaultAccount = response;
+
+      this.httpClient
+        .get(
+          CurrencyApi.GET_CURRENCY_COURSE.replace(
+            '#',
+            this.defaultAccount.currencyCode.toLowerCase()
+          )
+        )
+        .subscribe((response: any) => {
+          this.exchangeRateChanged = response.date;
+        });
+    });
 
     this.currencyService.getCurrencies().subscribe((response) => {
       this.currencies = response;
     });
-
-    this.httpClient
-      .get(
-        CurrencyApi.GET_CURRENCY_COURSE.replace(
-          '#',
-          this.defaultAccount.currencyCode.toLowerCase()
-        )
-      )
-      .subscribe((response: any) => {
-        this.exchangeRateChanged = response.date;
-      });
   }
 
   changeDefaultCurrency(currencyCode: string): void {
