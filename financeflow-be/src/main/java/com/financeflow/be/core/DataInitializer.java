@@ -3,9 +3,12 @@ package com.financeflow.be.core;
 import com.financeflow.be.models.dao.Account;
 import com.financeflow.be.models.dao.DefaultAccount;
 import com.financeflow.be.models.dao.Transaction;
+import com.financeflow.be.models.dto.BalanceContainer;
 import com.financeflow.be.repositories.AccountRepository;
 import com.financeflow.be.repositories.DefaultAccountRepository;
 import com.financeflow.be.repositories.TransactionRepository;
+import com.financeflow.be.services.implementations.TransactionService;
+import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -23,6 +26,9 @@ public class DataInitializer implements CommandLineRunner {
 
     @Autowired
     private TransactionRepository transactionRepository;
+
+    @Autowired
+    private TransactionService transactionService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -57,6 +63,13 @@ public class DataInitializer implements CommandLineRunner {
             account3.setCreatedAt(LocalDateTime.now());
             account3.setDefaultAccount(defaultAccountRepository.findById(1).get());
             accountRepository.save(account3);
+
+            DefaultAccount defaultAccount = defaultAccountRepository.findById(1).get();
+            Double account1BalanceInBam = transactionService.convertFromOneCurrencyToOther(new BalanceContainer(account1.getBalance(), account1.getCurrencyCode()), defaultAccount.getCurrencyCode());
+            Double account2BalanceInBam = transactionService.convertFromOneCurrencyToOther(new BalanceContainer(account2.getBalance(), account2.getCurrencyCode()), defaultAccount.getCurrencyCode());
+            Double account3BalanceInBam = transactionService.convertFromOneCurrencyToOther(new BalanceContainer(account3.getBalance(), account3.getCurrencyCode()), defaultAccount.getCurrencyCode());
+            defaultAccount.setBalance(account1BalanceInBam + account2BalanceInBam + account3BalanceInBam);
+            defaultAccountRepository.save(defaultAccount);
         }
 
         if (transactionRepository.count() == 0) {
