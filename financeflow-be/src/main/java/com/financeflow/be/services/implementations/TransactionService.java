@@ -98,7 +98,7 @@ public class TransactionService implements ITransactionService {
     }
 
     @Override
-    public List<TransactionOut> getAllTransactions() throws AccountNotFoundException, CurrencyDoesNotExistException {
+    public List<TransactionOut> getAllTransactions() throws AccountNotFoundException, CurrencyDoesNotExistException, TransactionsNotFoundExceptions {
         List<Transaction> transactions = transactionRepository.findAll();
         List<TransactionOut> response = new ArrayList<>();
         for (Transaction transaction : transactions) {
@@ -112,6 +112,8 @@ public class TransactionService implements ITransactionService {
             response.add(new TransactionOut(account.getName(), transaction.getDescription(), transaction.getExpense().toString(), transaction.getAmount(),
                     account.getCurrencyCode(), defaultAmount, defaultAccountRepository.findById(1).get().getCurrencyCode(), transaction.getProcessedAt().toString()));
         }
+
+        if (response.isEmpty()) throw new TransactionsNotFoundExceptions();
 
         return response;
     }
