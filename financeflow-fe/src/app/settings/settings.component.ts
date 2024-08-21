@@ -9,7 +9,7 @@ import { DefaultAccountResponse } from '../shared/models/defaultaccount.model';
 import { HttpClient } from '@angular/common/http';
 import { Currency, CurrencyRequest } from '../shared/models/currency.model';
 import { CurrencyService } from '../shared/services/currency.service';
-import { NgFor, NgIf } from '@angular/common';
+import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { KeyValuePipe } from '@angular/common';
 import { CurrencyApi } from '../shared/api/currency-api.constant';
 import { PopupComponent } from '../popup/popup.component';

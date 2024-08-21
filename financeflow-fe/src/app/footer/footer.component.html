@@ -3,7 +3,11 @@
     href="javascript:void(0)"
     class="footer__button"
     (click)="commitTransactionModalOpen()"
+    *ngIf="!isSettingsPage"
     >Create transaction</a
   >
-  <h1>Available: {{ balance?.toFixed(2) }}&nbsp;{{ currencyCode }}</h1>
+  <h1 *ngIf="!isSettingsPage">
+    Available: {{ balance?.toFixed(2) }}&nbsp;{{ currencyCode }}
+  </h1>
+  <p *ngIf="isSettingsPage">© 2024 Zijad Doglod. All rights reserved.</p>
 </div>

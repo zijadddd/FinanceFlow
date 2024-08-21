@@ -3,8 +3,8 @@
     <h1>FinanceFlow</h1>
   </div>
   <div class="navbar__items">
-    <a routerLink="/" class="items__link">Accounts</a>
-    <a routerLink="/transactions" class="items__link">Transactions</a>
-    <a routerLink="/settings" class="items__link">Settings</a>
+    <a routerLink="/" class="items__link" (click)="changeFooter(false)">Accounts</a>
+    <a routerLink="/transactions" class="items__link" (click)="changeFooter(false)">Transactions</a>
+    <a routerLink="/settings" class="items__link" (click)="changeFooter(true)">Settings</a>
   </div>
 </div>

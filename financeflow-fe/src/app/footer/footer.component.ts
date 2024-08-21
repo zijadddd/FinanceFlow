@@ -6,6 +6,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PopupComponent } from '../popup/popup.component';
 import { WhichAction } from '../shared/models/which-action.model';
+import { ActionWithVisibility } from '../shared/models/action-with-visibility';
 
 @Component({
   selector: 'app-footer',
@@ -18,6 +19,7 @@ import { WhichAction } from '../shared/models/which-action.model';
 export class FooterComponent implements OnInit {
   public balance: number;
   public currencyCode: string;
+  public isSettingsPage: boolean = false;
 
   constructor(
     private defaultAccountService: DefaultaccountService,
@@ -32,6 +34,14 @@ export class FooterComponent implements OnInit {
         this.getDefaultAccount();
       }
     });
+
+    this.communicationService.actionForFooter$.subscribe(
+      (actionWithVisibility: ActionWithVisibility) => {
+        if (actionWithVisibility.action === WhichAction.CHANGE_FOOTER) {
+          this.isSettingsPage = actionWithVisibility.isVisible ?? false;
+        }
+      }
+    );
   }
 
   getDefaultAccount() {

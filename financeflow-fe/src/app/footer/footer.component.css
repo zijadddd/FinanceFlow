@@ -31,3 +31,8 @@
 .form__type-balance-container {
   display: flex;
 }
+
+.footer p {
+  text-align: center;
+  width: 100%;
+}
