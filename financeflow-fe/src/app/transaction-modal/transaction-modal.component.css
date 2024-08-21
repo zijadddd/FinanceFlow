@@ -71,6 +71,13 @@ select {
   outline: 2px solid #262c78;
 }
 
+option {
+  font-family: "Montserrat";
+  background-color: #212528;
+  border-radius: 10px;
+  outline: none;
+}
+
 .form__select::before,
 .form__select::after {
   --size: 0.3rem;

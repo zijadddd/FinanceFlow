@@ -16,12 +16,7 @@
       />
       <label for="type">Type:</label>
 
-      <select
-        id="type"
-        formControlName="type"
-        class="form__select"
-        [(ngModel)]="defaultSelectedExpence"
-      >
+      <select id="type" formControlName="type" class="form__select">
         <option *ngFor="let type of expenseTypes" [value]="type">
           {{ type }}
         </option>
@@ -31,12 +26,7 @@
         <div>
           <label for="account">Account:</label>
 
-          <select
-            id="account"
-            formControlName="account"
-            class="form__select"
-            [(ngModel)]="defaultSelectedAccount"
-          >
+          <select id="account" formControlName="account" class="form__select">
             <option *ngFor="let account of accounts" [value]="account.id">
               {{ account.name }}
             </option>

@@ -40,7 +40,6 @@ export class AccountModalComponent implements OnInit {
   public currencies: { [key: string]: string }[] = [];
 
   public createAccountForm: FormGroup;
-  public defaultSelectedCurrency = 'eur';
 
   constructor(
     private accountService: AccountService,
@@ -55,7 +54,7 @@ export class AccountModalComponent implements OnInit {
     });
 
     this.createAccountForm = this.formBuilder.group({
-      currency: [''],
+      currency: ['eur'],
       accountName: [''],
       balance: [''],
     });
@@ -89,8 +88,9 @@ export class AccountModalComponent implements OnInit {
         this.communicationService.updateAccountsList();
         this.communicationService.updateFooter();
 
-        this.createAccountForm.reset();
-        this.defaultSelectedCurrency = 'eur';
+        this.createAccountForm.reset({
+          currency: 'eur',
+        });
         this.createAccountBtnClicked = false;
 
         setTimeout(() => {

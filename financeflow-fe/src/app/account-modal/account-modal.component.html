@@ -12,12 +12,7 @@
       />
       <label for="currency">Currency:</label>
 
-      <select
-        id="currency"
-        formControlName="currency"
-        class="form__select"
-        [(ngModel)]="defaultSelectedCurrency"
-      >
+      <select id="currency" formControlName="currency" class="form__select">
         <option *ngFor="let currency of currencies" [value]="currency['key']">
           {{ currency["value"] }}
         </option>

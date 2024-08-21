@@ -33,8 +33,6 @@ export class TransactionModalComponent implements OnInit {
   public accounts: AccountResponse[] = [];
   public commitTransactionBtnClicked: boolean = false;
   public commitTransactionForm: FormGroup;
-  public defaultSelectedAccount = 1;
-  public defaultSelectedExpence = ExpenseType.TRANSFER;
 
   public popupMessage: string = '';
   public popupType: boolean;
@@ -54,8 +52,8 @@ export class TransactionModalComponent implements OnInit {
 
     this.commitTransactionForm = this.formBuilder.group({
       description: [''],
-      type: [''],
-      account: [''],
+      type: [ExpenseType.TRANSFER],
+      account: [1],
       amount: [''],
     });
 
@@ -90,8 +88,10 @@ export class TransactionModalComponent implements OnInit {
         this.popupType = true;
         this.isPopupVisible = true;
 
-        this.commitTransactionForm.reset();
-        this.defaultSelectedAccount = 1;
+        this.commitTransactionForm.reset({
+          type: ExpenseType.TRANSFER,
+          account: 1,
+        });
         this.commitTransactionBtnClicked = false;
 
         this.communicationService.updateAccountsList();
