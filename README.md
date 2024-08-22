@@ -25,7 +25,7 @@ This web application represents the solution for the "My Budget" task as part of
 
 ## How to run this application?
 
-1. Clone this repository:
+1. Clone this repository.
 
 ```bash
 git clone https://github.com/zijadddd/FinanceFlow.git
