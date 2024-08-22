@@ -23,7 +23,7 @@ This web application represents the solution for the "My Budget" task as part of
   <li>MySQL</li>
 </ul>
 
-## How to run this application ?
+## How to run this application?
 
 1. Clone this repository:
 
@@ -56,7 +56,9 @@ spring:
 mvn spring-boot:run
 ```
 
-<b>IMPORTANT: The backend application will also automatically create the database, tables, relationships between them and import necessary data.</b><br> 4. Run frontend application. First, navigate to the financeflow-fe folder within the FinanceFlow directory. Then, open the terminal and execute the following commands.
+<b>IMPORTANT: The backend application will also automatically create the database, tables, relationships between them and import necessary data.</b><br>
+
+4. Run frontend application. First, navigate to the financeflow-fe folder within the FinanceFlow directory. Then, open the terminal and execute the following commands.
 
 ```bash
 npm install
