@@ -2,7 +2,7 @@
 
 ## Description
 
-This web application represents the solution for the "My Budget" task as part of the selection process for the Rookie Boot Camp internship at ProductDock. It was developed using Angular, SpringBoot, and MySQL. The application allows users to easily manage their finances, monitor their expenses and income, and perform transactions with their accounts.
+This web application represents the solution for the "My Budget" task as part of the selection process for the Rookie Boot Camp internship at ProductDock. It uses the Single Page Application (SPA) concept to ensure a smooth and seamless user experience, and was developed using Angular, SpringBoot, and MySQL. The application allows users to easily manage their finances, monitor their expenses and income, and perform transactions with their accounts.
 
 ## Characteristics
 
