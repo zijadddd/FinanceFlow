@@ -12,7 +12,7 @@ import {
   AccountRequest,
   AccountResponse,
 } from '../shared/models/account.model';
-import { catchError, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AccountService } from '../shared/services/account.service';
 import { CommunicationService } from '../shared/services/communication.service';

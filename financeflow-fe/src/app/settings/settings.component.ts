@@ -1,15 +1,10 @@
-import {
-  AfterViewInit,
-  Component,
-  OnInit,
-  ViewEncapsulation,
-} from '@angular/core';
+import { AfterViewInit, Component, ViewEncapsulation } from '@angular/core';
 import { DefaultaccountService } from '../shared/services/defaultaccount.service';
 import { DefaultAccountResponse } from '../shared/models/defaultaccount.model';
 import { HttpClient } from '@angular/common/http';
 import { Currency, CurrencyRequest } from '../shared/models/currency.model';
 import { CurrencyService } from '../shared/services/currency.service';
-import { DatePipe, NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { KeyValuePipe } from '@angular/common';
 import { CurrencyApi } from '../shared/api/currency-api.constant';
 import { PopupComponent } from '../popup/popup.component';

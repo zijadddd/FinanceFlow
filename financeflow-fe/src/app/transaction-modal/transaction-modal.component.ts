@@ -1,16 +1,15 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
 import { AccountResponse } from '../shared/models/account.model';
 import { ExpenseType } from '../shared/models/expense.model';
 import { AccountService } from '../shared/services/account.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { catchError, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import {
   TransactionRequest,
   TransactionResponse,
