@@ -42,7 +42,7 @@ public class DefaultAccountService implements IDefaultAccountService {
                 currencyCode
         );
         defaultAccount.setBalance(newBalance);
-        defaultAccount.setCurrencyCode(currencyCode);
+        defaultAccount.setCurrencyCode(currencyCode.toUpperCase());
         defaultAccountRepository.save(defaultAccount);
         return new MessageOut("Currency successfully changed.");
     }

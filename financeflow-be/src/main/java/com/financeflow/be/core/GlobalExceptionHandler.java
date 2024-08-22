@@ -43,11 +43,16 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(CurrencyDoesNotExistException.class)
     public ResponseEntity<MessageOut> handleCurrencyDoesNotExistException(CurrencyDoesNotExistException ex) {
-        return new ResponseEntity<>(new MessageOut(ex.getMessage()), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new MessageOut(ex.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(NoTransactionsForAccountException.class)
     public ResponseEntity<MessageOut> handleNoTransactionsForAccountException(NoTransactionsForAccountException ex) {
         return new ResponseEntity<>(new MessageOut(ex.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(BalanceNeedToBeGreaterThanZeroException.class)
+    public ResponseEntity<MessageOut> handleBalanceNeedToBeGreaterThanZeroException(BalanceNeedToBeGreaterThanZeroException ex) {
+        return new ResponseEntity<>(new MessageOut(ex.getMessage()), HttpStatus.BAD_REQUEST);
     }
 }

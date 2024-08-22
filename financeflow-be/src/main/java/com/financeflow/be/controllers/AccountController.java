@@ -2,6 +2,7 @@ package com.financeflow.be.controllers;
 
 import com.financeflow.be.core.exceptions.AccountNotFoundException;
 import com.financeflow.be.core.exceptions.AccountsNotFoundException;
+import com.financeflow.be.core.exceptions.BalanceNeedToBeGreaterThanZeroException;
 import com.financeflow.be.core.exceptions.CurrencyDoesNotExistException;
 import com.financeflow.be.models.dto.AccountIn;
 import com.financeflow.be.models.dto.AccountOut;
@@ -28,7 +29,7 @@ public class AccountController {
     }
 
     @PostMapping()
-    public ResponseEntity<AccountOut> createAccount(@RequestBody AccountIn request) throws CurrencyDoesNotExistException {
+    public ResponseEntity<AccountOut> createAccount(@RequestBody AccountIn request) throws CurrencyDoesNotExistException, BalanceNeedToBeGreaterThanZeroException {
         AccountOut response = accountService.create(request);
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);

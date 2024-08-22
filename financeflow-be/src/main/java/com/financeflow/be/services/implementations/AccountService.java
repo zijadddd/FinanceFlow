@@ -2,6 +2,7 @@ package com.financeflow.be.services.implementations;
 
 import com.financeflow.be.core.exceptions.AccountNotFoundException;
 import com.financeflow.be.core.exceptions.AccountsNotFoundException;
+import com.financeflow.be.core.exceptions.BalanceNeedToBeGreaterThanZeroException;
 import com.financeflow.be.core.exceptions.CurrencyDoesNotExistException;
 import com.financeflow.be.models.dao.Account;
 import com.financeflow.be.models.dao.DefaultAccount;
@@ -52,9 +53,10 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public AccountOut create(AccountIn request) throws CurrencyDoesNotExistException {
+    public AccountOut create(AccountIn request) throws CurrencyDoesNotExistException, BalanceNeedToBeGreaterThanZeroException {
         Account account = new Account();
         account.setName(request.getName());
+        if (request.getBalance() < 0) throw new BalanceNeedToBeGreaterThanZeroException();
         account.setBalance(request.getBalance());
         account.setCurrencyCode(request.getCurrencyCode().toUpperCase());
         account.setCreatedAt(LocalDateTime.now());
