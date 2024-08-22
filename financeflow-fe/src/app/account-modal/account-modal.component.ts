@@ -101,6 +101,7 @@ export class AccountModalComponent implements OnInit {
         this.popupMessage = error.error.text;
         this.popupType = false;
         this.isPopupVisible = true;
+        this.createAccountBtnClicked = false;
 
         setTimeout(() => {
           this.isPopupVisible = false;
