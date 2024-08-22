@@ -76,7 +76,7 @@ After these steps, application is ready to use.
 - **GET** `http://localhost:8080/api/transactions`: Returns all transactions from the database.
 - **GET** `http://localhost:8080/api/transactions/{id}`: Returns all transactions for a specific account.
 
-## PAGES
+## Pages
 
 - `http://localhost:4200/`: Accounts page
 - `http://localhost:4200/transactions`: Transactions page
