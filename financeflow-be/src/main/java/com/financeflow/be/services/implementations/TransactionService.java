@@ -80,8 +80,8 @@ public class TransactionService implements ITransactionService {
         Double sumOfBalances = accountsBalances.stream().map(accountBalance -> {
             try {
                 return convertFromOneCurrencyToOther(
-                                new BalanceContainer(accountBalance.getBalance(), accountBalance.getCurrencyCode()),
-                                defaultAccount.getCurrencyCode());
+                        new BalanceContainer(accountBalance.getBalance(), accountBalance.getCurrencyCode()),
+                        defaultAccount.getCurrencyCode());
             } catch (CurrencyDoesNotExistException e) {
                 throw new RuntimeException(e);
             }
@@ -136,7 +136,7 @@ public class TransactionService implements ITransactionService {
                     account.getCurrencyCode(), defaultAmount, defaultAccount.getCurrencyCode(), transaction.getProcessedAt().toString()));
         }
 
-        Account account = accountRepository.findById(id).get();
+        Account account = accountRepository.findById(id).orElseThrow(() -> new AccountNotFoundException(id));
 
         if (response.isEmpty()) throw new NoTransactionsForAccountException(account.getName());
 
