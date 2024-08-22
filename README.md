@@ -50,6 +50,8 @@ spring:
       ddl-auto: update
 ```
 
+<b>IMPORTANT: Before starting the backend application, make sure that MySQL is running on your local machine.</b><br>
+
 3. Run backend server. First, navigate to the financeflow-be folder within the FinanceFlow directory. Then, open the terminal and execute the following command.
 
 ```bash
