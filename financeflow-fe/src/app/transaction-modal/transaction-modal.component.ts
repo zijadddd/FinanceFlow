@@ -67,6 +67,20 @@ export class TransactionModalComponent implements OnInit {
     this.accountService.getAllAccounts().subscribe((response) => {
       this.accounts = response;
     });
+
+    if (this.accounts.length === 0) {
+      this.closeCommitTransactionModalClicked();
+
+      this.popupMessage = "You can't commit the transaction.";
+      this.popupType = false;
+      this.isPopupVisible = true;
+
+      setTimeout(() => {
+        this.isPopupVisible = false;
+      }, 5000);
+      return;
+    }
+
     this.commitTransactionBtnClicked = true;
   }
 
@@ -91,7 +105,7 @@ export class TransactionModalComponent implements OnInit {
           type: ExpenseType.TRANSFER,
           account: 1,
         });
-        this.commitTransactionBtnClicked = false;
+        this.closeCommitTransactionModalClicked();
 
         this.communicationService.updateAccountsList();
         this.communicationService.updateTransactionsList();
@@ -105,7 +119,7 @@ export class TransactionModalComponent implements OnInit {
         this.popupType = false;
         this.isPopupVisible = true;
 
-        this.commitTransactionBtnClicked = false;
+        this.closeCommitTransactionModalClicked();
 
         setTimeout(() => {
           this.isPopupVisible = false;
