@@ -23,7 +23,7 @@ This web application represents the solution for the "My Budget" task as part of
   <li>MySQL</li>
 </ul>
 
-## Installation
+## How to run this application ?
 
 1. Clone this repository:
 
