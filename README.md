@@ -2,7 +2,7 @@
 
 ## Description
 
-This web application is the solution to the Rookie Boot Camp Internship assignment at <b>ProductDock</b>. It was developed using Angular, SpringBoot and MySQL. This application allows users to easily manage their finances, track expenses and income and perform transactions with the accounts they have.
+This web application represents the solution for the "My Budget" task as part of the selection process for the Rookie Boot Camp internship at ProductDock. It was developed using Angular, SpringBoot, and MySQL. The application allows users to easily manage their finances, monitor their expenses and income, and perform transactions with their accounts.
 
 ## Characteristics
 
@@ -31,7 +31,7 @@ This web application is the solution to the Rookie Boot Camp Internship assignme
 git clone https://github.com/zijadddd/FinanceFlow.git
 ```
 
-2. Before running the backend server, the MySQL database needs to be configured. This involves installing MySQL on the local machine. Once MySQL is installed, navigate to the financeflow-be/src/resources folder within the FinanceFlow directory that was recently cloned and open the application.yml file. In this file, the URL of the database should be specified under the datasource. Additionally, you need to specify the username and password under the datasource configuration.
+2. Before running the backend server, the MySQL database needs to be configured. This involves installing MySQL on the local machine. Once MySQL is installed, navigate to the financeflow-be/src/resources folder within the FinanceFlow directory that was recently cloned and open the application.yml file. In this file, the URL of the database should be specified under the datasource. Additionally, you need also to specify the username and password.
 
 ```yml
 spring:
@@ -56,7 +56,7 @@ spring:
 mvn spring-boot:run
 ```
 
-<b>IMPORTANT: The backend application will also automatically create the database, tables, and relationships between them.</b><br> 4. Run frontend application. First, navigate to the financeflow-fe folder within the FinanceFlow directory. Then, open the terminal and execute the following commands.
+<b>IMPORTANT: The backend application will also automatically create the database, tables, relationships between them and import necessary data.</b><br> 4. Run frontend application. First, navigate to the financeflow-fe folder within the FinanceFlow directory. Then, open the terminal and execute the following commands.
 
 ```bash
 npm install
