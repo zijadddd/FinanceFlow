@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -64,22 +64,23 @@ export class TransactionModalComponent implements OnInit {
   }
 
   commitTransactionModalOpen() {
-    this.accountService.getAllAccounts().subscribe((response) => {
-      this.accounts = response;
-    });
+    this.accountService.getAllAccounts().subscribe(
+      (response) => {
+        this.accounts = response;
+      },
+      (error: HttpErrorResponse) => {
+        this.closeCommitTransactionModalClicked();
 
-    if (this.accounts.length === 0) {
-      this.closeCommitTransactionModalClicked();
+        this.popupMessage = "You can't commit the transaction.";
+        this.popupType = false;
+        this.isPopupVisible = true;
 
-      this.popupMessage = "You can't commit the transaction.";
-      this.popupType = false;
-      this.isPopupVisible = true;
-
-      setTimeout(() => {
-        this.isPopupVisible = false;
-      }, 5000);
-      return;
-    }
+        setTimeout(() => {
+          this.isPopupVisible = false;
+        }, 5000);
+        return;
+      }
+    );
 
     this.commitTransactionBtnClicked = true;
   }
