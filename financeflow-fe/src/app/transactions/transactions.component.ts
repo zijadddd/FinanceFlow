@@ -55,15 +55,7 @@ export class TransactionsComponent implements OnInit {
         this.isLoaderVisible = false;
       },
       (error: HttpErrorResponse) => {
-        this.popupMessage = error.error.text;
-        this.popupType = false;
-        this.isPopupVisible = true;
         this.isLoaderVisible = false;
-
-        setTimeout(() => {
-          this.isPopupVisible = false;
-        }, 5000);
-        return throwError(() => error);
       }
     );
 
